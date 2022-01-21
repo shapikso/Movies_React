@@ -1,0 +1,79 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+:root {
+  --dark-primary-color: #151C26;
+  --dark-primary-color-opacity: #151C267F;
+  --dark-primary-color-opacity-80: #151C26CC;
+  --dark-primary-color-opacity-90: #000000e6;
+  --light-primary-color: #DBDEE5;
+  --light-primary-color-opacity: #DBDEE580;
+  --primary-color: #5C5470;
+  --primary-color-opacity: #5C547080;
+  --primary-color-disabled: #5C547033;
+  --primary-color-invalid: #ff0000;
+}
+
+body {
+  background-color: var(--dark-primary-color);
+  color: var(--light-primary-color);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+body.scroll-hidden {
+  overflow: hidden;
+  position: relative;
+}
+
+body.scroll-hidden:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000000E6;
+  z-index: 5;
+
+  animation: bg-color 0.2s ease forwards;
+}
+
+@keyframes bg-color {
+  from {
+    background-color: transparent; }
+  to {
+    background-color: #000000E6;
+  }
+}
+
+a {
+  color: var(--light-primary-color);
+}
+
+.container {
+  max-width: 1500px;
+  padding: 0 40px;
+  margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--light-primary-color);
+}
