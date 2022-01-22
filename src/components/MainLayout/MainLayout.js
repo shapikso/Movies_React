@@ -16,7 +16,7 @@ class MainLayout extends Component {
                     <div className="container">
                         <div className="header__container">
                             <div className="header__logo">
-                                <Link to="/moviesс">
+                                <Link to="/movies">
                                     <img
                                         className="header__logo-image"
                                         src={logo}

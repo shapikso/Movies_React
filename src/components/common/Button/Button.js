@@ -31,14 +31,7 @@ Button.propTypes = {
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     onClick: PropTypes.func,
-    children: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        PropTypes.object,
-        PropTypes.bool,
-        PropTypes.arrayOf(PropTypes.object),
-        PropTypes.arrayOf(PropTypes.el),
-    ]).isRequired,
+    children: PropTypes.PropTypes.string.isRequired,
 };
 
 export default Button;
