@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './main.scss';
-import logo from '../../Bubble-logo.svg';
+import Logo from './Logo/Logo';
 import {Link} from "react-router-dom";
 import Button from '../common/Button/Button';
 
@@ -17,11 +17,7 @@ class MainLayout extends Component {
                         <div className="header__container">
                             <div className="header__logo">
                                 <Link to="/movies">
-                                    <img
-                                        className="header__logo-image"
-                                        src={logo}
-                                        alt="Logo"
-                                    />
+                                    <Logo/>
                                 </Link>
                             </div>
                             <div className="header__links">
