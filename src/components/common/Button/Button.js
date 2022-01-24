@@ -8,7 +8,7 @@ const Button = ({
     isDisabled = false,
     className,
     onClick,
-    children,
+    contentKey,
 }) => {
     const btnClasses = ['button'];
     if (className) {
@@ -21,7 +21,7 @@ const Button = ({
             onClick={onClick}
             disabled={isDisabled}
         >
-            {children}
+            {contentKey}
         </button>
     );
 };
@@ -31,7 +31,7 @@ Button.propTypes = {
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     onClick: PropTypes.func,
-    children: PropTypes.PropTypes.string.isRequired,
+    contentKey: PropTypes.string.isRequired,
 };
 
 export default Button;

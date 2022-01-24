@@ -6,7 +6,7 @@ class Movies extends Component {
         return (
             <div>
                 <h1>Movies</h1>
-                <Button/>
+                <Button contentKey ="Load More"/>
             </div>
         );
     }

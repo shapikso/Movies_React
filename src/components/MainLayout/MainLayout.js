@@ -23,7 +23,7 @@ class MainLayout extends Component {
                             <div className="header__links">
                                 <div className="basic-link header__links-item">
                                     <Link to="/sing-up">
-                                        <Button className="button--link">Sing up</Button>
+                                        <Button className="button--link" contentKey="Sing Up"/>
                                     </Link>
                                 </div>
                             </div>
