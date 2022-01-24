@@ -22,6 +22,7 @@ class MainLayout extends Component {
                             <div className="header__links">
                                 <div className="basic-link header__links-item">
                                     <Link to="/sing-up">sing up</Link>
+                                    <Link to="/movie/:id">  movie page</Link>
                                 </div>
                             </div>
                         </div>
