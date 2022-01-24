@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from "axios";
 import './MoviePage.scss';
 import MovieDetails from "./MovieDetails/MovieDetails";
@@ -33,31 +33,29 @@ class MoviePage extends Component {
     getMovieFromApi = async () => {
         try {
             this.startLoader();
-            const res = await axios.get('http://localhost:3001/movie/?id=12');
+            const res = await axios.get('http://localhost:3001/movie/?id=13');
             this.setState({film: res.data});
-            console.log(this.state.film);
             this.formatRuntime();
         } catch (error) {
+            // eslint-disable-next-line no-console
             console.log(error);
-        }finally {
+        } finally {
             this.stopLoader();
         }
     }
 
     formatRuntime = () => {
-        // if (typeof this.state.film.runtime !== 'number' || !Number.isFinite(this.state.film.runtime !== 'number') || this.state.film.runtime !== 'number' < 1) return 'null';
         const hours = Math.floor(this.state.film.runtime / 60);
         const minutes = this.state.film.runtime % 60;
         this.setState({hours: hours, minutes: minutes});
     }
 
-    // addGenres = () => {
-    //     const genres = this.state.film.name;
-    //     genres.forEach(element => this.setState({genres: [...this.state.genres, element]}));
-    // }
-
 
     render() {
+        const styles = {
+            background: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${'https://image.tmdb.org/t/p/original/' + this.state.film.backdrop_path})`,
+            backgroundSize: 'cover'
+        };
         return (
             <div>
                 {this.state.isLoading
@@ -67,9 +65,7 @@ class MoviePage extends Component {
                         <div className="title">
                             <span>{this.state.film.title}</span>
                         </div>
-                        <div className="movie-details">
-                            <img alt='filmLogo'
-                                src={`https://image.tmdb.org/t/p/original/${this.state.film.backdrop_path}`}/>
+                        <div className="movie-details" style={styles}>
                             <MovieDetails film={this.state.film} hours={this.state.hours} minutes={this.state.minutes}/>
                             <GenreDetails genres={this.state.film.name}/>
                             <OverviewDetails overview={this.state.film.overview}/>
