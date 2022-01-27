@@ -12,82 +12,108 @@ class Filters extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchTitle: '',
+            title: '',
             language: '',
             status:  '',
-            minDate: '',
-            maxDate: '',
-            minBudget: 0,
-            maxBudget: 500000000,
-            minPopularity: 0,
-            maxPopularity: 200,
-            minVote: 0,
-            maxVote: 30000
+            release_date_first: '',
+            release_date_last: '',
+            budget_min: 0,
+            budget_max: 500000000,
+            popularity_min: 0,
+            popularity_max: 200,
+            revenue_min: 0,
+            revenue_max: 30000,
+            isResetDisabled: true
         };
     }
-    setBudget = (minBudget, maxBudget) => this.setState({minBudget: minBudget,maxBudget: maxBudget});
-    setPopularity = (minPopularity, maxPopularity) => this.setState({minPopularity: minPopularity,maxPopularity: maxPopularity});
-    setVote = (minVote, maxVote) => this.setState({minVote: minVote,maxVote: maxVote});
+    setBudget = (minBudget, maxBudget) => this.setState({budget_min: minBudget,budget_max: maxBudget});
+    setPopularity = (minPopularity, maxPopularity) => this.setState({ popularity_min: minPopularity, popularity_max: maxPopularity});
+    setVote = (minVote, maxVote) => this.setState({revenue_min: minVote,revenue_max: maxVote});
     setLanguage = (language) => this.setState({language: language});
     setStatus = (status) => this.setState({status: status});
-    setSearchTitle = (title) => this.setState({searchTitle: title});
-    setMinDate = (date) => this.setState({minDate: date});
-    setMaxDate = (date) => this.setState({maxDate: date});
+    setSearchTitle = (title) => this.setState({title: title});
+    setMinDate = (date) => this.setState({release_date_first: date});
+    setMaxDate = (date) => this.setState({release_date_last: date});
 
-    render() {
-        return (
-            <form id="filters" name="filters" className="form-filters frosted-glass-effect" action="#">
-                <div className="form-filters__header">
-                    <FilterInput setSearchTitle={this.setSearchTitle} />
-                    <Select setDelector={this.setStatus} options={movieStatus} />
-                    <Select setDelector={this.setLanguage} options={movieLanguages} />
+    getUrl = () => {
+        let result = `http://localhost:3001/movies?`;
+        Object.entries(this.state).forEach((element) => {
+            if (element[1] !== '' && element[0] !== 'isResetDisabled') {
+                result += `&${element[0]}=${element[1].toString().replace(/,/g, '').replace(/ /g, '%20')}`;
+            }
+        });
+        return result;
+    };
+
+ formSubmitHandler = (e) => {
+     e.preventDefault();
+     localStorage.setItem('isFiltersApply', 'true');
+     localStorage.setItem('filtersURL', this.getUrl());
+     localStorage.removeItem('moviesPages');
+     this.setState({isResetDisabled: false});
+ };
+
+formResetHandler = () => {
+    localStorage.removeItem('isFiltersApply');
+    localStorage.removeItem('filtersURL');
+    localStorage.removeItem('moviesPages');
+    this.setState({isResetDisabled: true});
+};
+
+render() {
+    return (
+        <form id="filters" name="filters" className="form-filters frosted-glass-effect" action="#">
+            <div className="form-filters__header">
+                <FilterInput setSearchTitle={this.setSearchTitle} />
+                <Select setDelector={this.setStatus} options={movieStatus} />
+                <Select setDelector={this.setLanguage} options={movieLanguages} />
+            </div>
+            <div className="form-filters__ranges">
+                <DoubleRange setRange={this.setBudget}
+                    title="Budget, $"
+                    step="100000"
+                    minValue="0"
+                    maxValue="500000000"
+                    maxInputValue={this.state.budget_max}
+                    minInputValue={this.state.budget_min}
+                />
+                <DoubleRange setRange={this.setPopularity}
+                    title="Popularity"
+                    step="1" minValue="0"
+                    maxValue="200"
+                    maxInputValue={this.state.popularity_max}
+                    minInputValue={this.state.popularity_min}
+                />
+                <DoubleRange setRange={this.setVote}
+                    title="Vote count"
+                    step="1"
+                    minValue="0"
+                    maxValue="30000"
+                    maxInputValue={this.state.revenue_max}
+                    minInputValue={this.state.revenue_min}
+                />
+            </div>
+            <div className="form-filters__release-date">
+                <div id="release-date-first" className="form-filters__release-date__item date-picker">
+                    <DatePicker selected={this.state.release_date_first}
+                        onChange={(date) => this.setMinDate(date)}
+                        placeholderText="Select Date.."
+                        className="basic-field date-picker__input" />
                 </div>
-                <div className="form-filters__ranges">
-                    <DoubleRange setRange={this.setBudget}
-                        title="Budget, $"
-                        step="100000"
-                        minValue="0"
-                        maxValue="500000000"
-                        maxInputValue={this.state.maxBudget}
-                        minInputValue={this.state.minBudget}
-                    />
-                    <DoubleRange setRange={this.setPopularity}
-                        title="Popularity"
-                        step="1" minValue="0"
-                        maxValue="200"
-                        maxInputValue={this.state.maxPopularity}
-                        minInputValue={this.state.minPopularity}
-                    />
-                    <DoubleRange setRange={this.setVote}
-                        title="Vote count"
-                        step="1"
-                        minValue="0"
-                        maxValue="30000"
-                        maxInputValue={this.state.maxVote}
-                        minInputValue={this.state.minVote}
-                    />
+                <div id="release-date-last" className="form-filters__release-date__item date-picker">
+                    <DatePicker selected={this.state.release_date_last}
+                        onChange={(date) => this.setMaxDate(date)}
+                        placeholderText="Select Date.."
+                        className="basic-field date-picker__input" />
                 </div>
-                <div className="form-filters__release-date">
-                    <div id="release-date-first" className="form-filters__release-date__item date-picker">
-                        <DatePicker selected={this.state.minDate}
-                            onChange={(date) => this.setMinDate(date)}
-                            placeholderText="Select Date.."
-                            className="basic-field date-picker__input" />
-                    </div>
-                    <div id="release-date-last" className="form-filters__release-date__item date-picker">
-                        <DatePicker selected={this.state.maxDate}
-                            onChange={(date) => this.setMaxDate(date)}
-                            placeholderText="Select Date.."
-                            className="basic-field date-picker__input" />
-                    </div>
-                </div>
-                <div className="form-filters__buttons">
-                    <Button type="submit" className="basic-btn" contentKey ="Submit"/>
-                    <Button type="reset" className="basic-btn" isDisabled={true} contentKey="Reset"/>
-                </div>
-            </form>
-        );
-    }
+            </div>
+            <div className="form-filters__buttons">
+                <Button onClick={this.formSubmitHandler} type="submit" className="basic-btn" contentKey ="Submit"/>
+                <Button onClick={this.formResetHandler} type="reset" className="basic-btn" isDisabled={this.state.isResetDisabled} contentKey="Reset"/>
+            </div>
+        </form>
+    );
+}
 }
 
 export default Filters;
