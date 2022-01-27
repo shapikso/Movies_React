@@ -39,6 +39,7 @@
     justify-content: center;
     margin-bottom: 40px;
 }
+
 .movies {
     margin-top: 30px;
     display: grid;
@@ -47,3 +48,9 @@
     justify-content: center;
     flex-grow: 1;
 }
+
+.place-right {
+    display: flex;
+    justify-content: end;
+    flex-shrink: 0;
+  }
