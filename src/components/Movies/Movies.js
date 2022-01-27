@@ -4,6 +4,7 @@ import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
 import axios from 'axios';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
+import Loader from '../common/Loader/Loader';
 
 
 class Movies extends Component {
@@ -48,22 +49,24 @@ class Movies extends Component {
                     <Button className="button--short" contentKey="Filters" />
                 </div>
                 <div id="movie-list" className="movies">
-                    { this.state.movies.map((element) => (
-                        <MovieCard
-                            key={element.id}
-                            id={element.id}
-                            backdrop_path={element.backdrop_path} 
-                            title={element.title}
-                            runtime = { element.runtime } 
-                            vote_average= {element.vote_average} 
-                        />
-                    ))}
+                    {this.state.isLoading ? (
+                        <Loader />
+                    ) : this.state.movies.length ? 
+                        (this.state.movies.map((element) => (
+                            <MovieCard
+                                key={element.id}
+                                id={element.id}
+                                backdrop_path={element.backdrop_path} 
+                                title={element.title}
+                                runtime = { element.runtime } 
+                                vote_average= {element.vote_average} 
+                            />
+                        ))) : (
+                            <h1>You have no images!</h1>
+                        )}
                 </div>
                 <div className="center">
                     <Button className="button" contentKey="Load More" onClick={()=> this.loadMore() } />
-                    {/* <button id="load-more" className="basic-btn" disabled>
-                    Load More
-                </button> */}
                 </div>
             </div>
         );

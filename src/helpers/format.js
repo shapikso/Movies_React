@@ -1,4 +1,4 @@
-import { NO_RATE } from '../constants/formatMovie';
+import { NO_RATE, GOOD_RATE, BAD_RATE } from '../constants/formatMovie';
 
 export const formatRuntime = (runtime) => {
     if (typeof runtime !== 'number' || !Number.isFinite(runtime) || runtime < 1)
@@ -9,3 +9,10 @@ export const formatRuntime = (runtime) => {
 };
 
 export const formatRate = (rate) => (rate ? `${rate}` : NO_RATE);
+
+export const getRateState = (rate) => {
+    if (rate === null) return BAD_RATE;
+    const rateToNumber = Number(rate);
+    if (!Number.isFinite(rateToNumber) || rateToNumber < 7) return BAD_RATE;
+    return GOOD_RATE;
+};
