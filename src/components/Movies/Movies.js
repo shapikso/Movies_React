@@ -10,11 +10,12 @@ class Movies extends Component {
             isFiltersHidden : true
         };
     }
+    toggleFilters = (e) =>e.target.classList.contains('filters-modal-box') || e.target.classList.contains('button') ? this.setState({isFiltersHidden: !this.state.isFiltersHidden}) : 0;
     render() {
         return (
             <div className="container movie-wrapper">
                 <div className="place-right">
-                    <Button contentKey ="Filters"/>
+                    <Button onClick={this.toggleFilters} contentKey ="Filters"/>
                 </div>
                 <div id="movie-list" className="movies">
 
@@ -23,7 +24,7 @@ class Movies extends Component {
                 <div className="center">
                     <Button contentKey ="Load More"/>
                 </div>
-                <div id="filters-modal" className="filters-modal-box ">
+                <div id="filters-modal" onClick={this.toggleFilters} className={this.state.isFiltersHidden ? "filters-modal-box hide" : "filters-modal-box" }>
                     <Filters/>
                 </div>
             </div>

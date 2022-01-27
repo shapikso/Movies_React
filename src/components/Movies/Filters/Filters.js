@@ -6,6 +6,7 @@ import FilterInput from "./Input/FilterInput";
 import DoubleRange from "./DoubleRange/DoubleRange";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Button from "../../common/Button/Button";
 
 class Filters extends Component {
     constructor(props) {
@@ -40,10 +41,8 @@ class Filters extends Component {
                     <FilterInput setSearchTitle={this.setSearchTitle} />
                     <Select setDelector={this.setStatus} options={movieStatus} />
                     <Select setDelector={this.setLanguage} options={movieLanguages} />
-
                 </div>
                 <div className="form-filters__ranges">
-
                     <DoubleRange setRange={this.setBudget}
                         title="Budget, $"
                         step="100000"
@@ -83,8 +82,8 @@ class Filters extends Component {
                     </div>
                 </div>
                 <div className="form-filters__buttons">
-                    <button type="submit" className="basic-btn">Submit</button>
-                    <button id="reset-btn" type="reset" className="basic-btn" disabled>Reset</button>
+                    <Button type="submit" className="basic-btn" contentKey ="Submit"/>
+                    <Button type="reset" className="basic-btn" isDisabled={true} contentKey="Reset"/>
                 </div>
             </form>
         );
