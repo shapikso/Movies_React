@@ -279,3 +279,8 @@
     font-size: 16px;
     color: var(--light-primary-color);
 }
+.sliderArea {
+    width: 300px;
+    margin: 0 auto;
+}
+
