@@ -46,9 +46,9 @@ class Movies extends Component {
                     {this.state.isLoading ? (
                         <Loader />
                     ) : this.state.movies.length ? 
-                        (this.state.movies.map((element,index) => (
+                        (this.state.movies.map((element) => (
                             <MovieCard
-                                key={index}
+                                key={element.id}
                                 id={element.id}
                                 backdropPath={element.backdrop_path} 
                                 title={element.title}

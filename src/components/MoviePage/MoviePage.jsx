@@ -28,10 +28,7 @@ class MoviePage extends Component {
             const res = await axios.get(`${MOVIE_BY_ID}${this.props.match.params.id}`);
             this.setState({film: res.data});
             this.formatRuntime();
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.log(error);
-        } finally {
+        }finally {
             this.setState({isLoading: false});
         }
     }
