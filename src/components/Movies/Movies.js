@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
 import './Movies.scss';
+import React, { Component } from 'react';
+import axios from 'axios';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
-import axios from 'axios';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
 import Loader from '../common/Loader/Loader';
 
@@ -25,13 +25,7 @@ class Movies extends Component {
         try {
             this.setState({ isLoading: true });
             const { data } = await axios.get(`${URL_MOVIE}?page=${this.state.currentPage}&per_page=${MOVIE_ON_PAGE}`);
-            this.setState((prevState) => {
-                return {
-                    ...prevState,
-                    movies: [...prevState.movies, ...data],
-                    currentPage: prevState.currentPage + 1
-                };
-            });
+            this.setState((prevState) => ({ ...prevState, movies: [...prevState.movies, ...data],currentPage: prevState.currentPage + 1}));
         } finally {
             this.setState({ isLoading: false });
         }
@@ -56,13 +50,13 @@ class Movies extends Component {
                             <MovieCard
                                 key={element.id}
                                 id={element.id}
-                                backdrop_path={element.backdrop_path} 
+                                backdropPath={element.backdrop_path} 
                                 title={element.title}
-                                runtime = { element.runtime } 
-                                vote_average= {element.vote_average} 
+                                runtime={ element.runtime } 
+                                voteAverage={element.vote_average} 
                             />
                         ))) : (
-                            <h1>You have no images!</h1>
+                            <h1>You have no films!</h1>
                         )}
                 </div>
                 <div className="center">

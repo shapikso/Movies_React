@@ -1,20 +1,19 @@
+import './MovieCard.scss';
 import React from 'react';
 import { URL_IMG } from '../../../constants/api';
 import { Link } from 'react-router-dom';
-import './MovieCard.scss';
 import { formatRuntime, formatRate, getRateState } from '../../../helpers/format';
 
-
-const MovieCard = ({ id, backdrop_path, title, runtime, vote_average }) => {
+const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const runtimeFormated = formatRuntime(runtime);
-    const formatedRate = formatRate(vote_average);
-    const typeRate = getRateState(vote_average);
+    const formatedRate = formatRate(voteAverage);
+    const typeRate = getRateState(voteAverage);
     return (
         <Link to={`movie/${id}`}>
-            <div className="MovieCard card" data-movieid={id}>
+            <div className="movie-card card">
                 <div className="card-wrapper">
                     <div className="film-poster">
-                        <img src={URL_IMG+backdrop_path} className="small-poster" alt="poster" />
+                        <img src={URL_IMG+backdropPath} className="small-poster" alt="poster" />
                     </div>
                     <div className="film-description">
                         <div className="film-name">
@@ -24,7 +23,7 @@ const MovieCard = ({ id, backdrop_path, title, runtime, vote_average }) => {
                             <span>{runtimeFormated}</span>
                         </div>
                     </div>
-                    <div className={"film-rate" + ' ' + `${typeRate}`}>
+                    <div className={`film-rate ${typeRate}`}>
                         <span>{formatedRate}</span>
                     </div>
                 </div>

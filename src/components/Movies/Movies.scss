@@ -1,3 +1,5 @@
+@import '../common/styles/colors.scss';
+
 .movie-wrapper {
     display: flex;
     flex-direction: column;
@@ -10,7 +12,7 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: linear-gradient(225.82deg, #352F44 24.16%, #5C5470 87.91%);
+    background: linear-gradient(225.82deg, $dark-primary 24.16%, $primary-color 87.91%);
     position: fixed;
     top: 50px;
     left: -75px;
@@ -21,7 +23,7 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: linear-gradient(225.82deg, #352F44 24.16%, #5C5470 87.91%);
+    background: linear-gradient(225.82deg, $dark-primary 24.16%, $primary-color 87.91%);
     position: fixed;
     bottom: 50px;
     right: -75px;
