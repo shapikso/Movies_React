@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import './movies.scss';
 import './Movies.scss';
 import Button from '../common/Button/Button';
-import Filters from './Filters/Filters';
 import MovieCard from './MovieCard/MovieCard';
 import axios from 'axios';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
 import Loader from '../common/Loader/Loader';
+import Filters from "./Filters/Filters";
 
 
 class Movies extends Component {
@@ -21,30 +21,40 @@ class Movies extends Component {
     }
 
     componentDidMount() {
-        this.getMovies();
+        this.getMovies(this.getCurrentUrl(this.state.currentPage));
     }
 
-    toggleFilters = (e) =>e.target.classList.contains('filters-modal-box') || e.target.classList.contains('button') ? this.setState({isFiltersHidden: !this.state.isFiltersHidden}) : 0;
+    toggleFilters = () =>  this.setState({isFiltersHidden: !this.state.isFiltersHidden});
 
-    getMovies = async () => {
+    getCurrentUrl = (page) => {
+        const filtersURL = localStorage.getItem('filtersURL');
+        const isFilters = localStorage.getItem('isFiltersApply') === 'true';
+        return (isFilters
+            ? `${filtersURL}&page=${page}&per_page=${MOVIE_ON_PAGE}`
+            : `${URL_MOVIE}?page=${page}&per_page=${MOVIE_ON_PAGE}`);
+    };
+
+    getMovies = async (URL) => {
         try {
             this.setState({ isLoading: true });
-            const { data } = await axios.get(`${URL_MOVIE}?page=${this.state.currentPage}&per_page=${MOVIE_ON_PAGE}`);
-            this.setState((prevState) => {
-                return {
-                    ...prevState,
-                    movies: [...prevState.movies, ...data],
-                    currentPage: prevState.currentPage + 1
-                };
-            });
+            const { data } = await axios.get(URL);
+            this.setState({movies: [...this.state.movies, ...data], currentPage: this.state.currentPage+1});
         } finally {
             this.setState({ isLoading: false });
         }
     };
 
-    loadMore = () => {
-        this.setState({ currentPage: this.state.currentPage + 1 });
-        this.getMovies();
+    setPage = (page) => this.setState({ currentPage: page });
+
+    loadMore = (page) => {
+        console.log( this.state.currentPage);
+        console.log(page || this.state.currentPage + 1);
+        this.getMovies(this.getCurrentUrl(page || this.state.currentPage));
+    }
+
+    submitResetFilters = () => {
+        this.setState({ currentPage: 1, movies: [] });
+        this.loadMore(1);
     }
 
     render() {
@@ -71,10 +81,10 @@ class Movies extends Component {
                         )}
                 </div>
                 <div className="center">
-                    <Button className="button" contentKey="Load More" onClick={()=> this.loadMore() } />
+                    <Button className="button" contentKey="Load More" onClick={this.loadMore} />
                 </div>
-                <div id="filters-modal" onClick={this.toggleFilters} className={this.state.isFiltersHidden ? "filters-modal-box hide" : "filters-modal-box" }>
-                    <Filters/>
+                <div id="filters-modal" className={this.state.isFiltersHidden ? "filters-modal-box hide" : "filters-modal-box" }>
+                    <Filters closeModal={this.toggleFilters} onSubmite={this.submitResetFilters}/>
                 </div>
             </div>
         );

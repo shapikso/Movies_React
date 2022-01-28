@@ -45,11 +45,12 @@ class Filters extends Component {
         return result;
     };
 
- formSubmitHandler = (e) => {
-     e.preventDefault();
+ formSubmitHandler = () => {
      localStorage.setItem('isFiltersApply', 'true');
      localStorage.setItem('filtersURL', this.getUrl());
      localStorage.removeItem('moviesPages');
+     this.props.closeModal();
+     this.props.onSubmite();
      this.setState({isResetDisabled: false});
  };
 
@@ -57,6 +58,8 @@ formResetHandler = () => {
     localStorage.removeItem('isFiltersApply');
     localStorage.removeItem('filtersURL');
     localStorage.removeItem('moviesPages');
+    this.props.closeModal();
+    this.props.onSubmite();
     this.setState({isResetDisabled: true});
 };
 
@@ -64,7 +67,7 @@ render() {
     return (
         <form id="filters" name="filters" className="form-filters frosted-glass-effect" action="#">
             <div className="form-filters__header">
-                <FilterInput setSearchTitle={this.setSearchTitle} />
+                <FilterInput value={this.state.title} setSearchTitle={this.setSearchTitle} />
                 <Select setDelector={this.setStatus} options={movieStatus} />
                 <Select setDelector={this.setLanguage} options={movieLanguages} />
             </div>
@@ -109,7 +112,8 @@ render() {
             </div>
             <div className="form-filters__buttons">
                 <Button onClick={this.formSubmitHandler} type="submit" className="basic-btn" contentKey ="Submit"/>
-                <Button onClick={this.formResetHandler} type="reset" className="basic-btn" isDisabled={this.state.isResetDisabled} contentKey="Reset"/>
+                <Button onClick={this.props.closeModal} className="basic-btn" contentKey ="Close"/>
+                <Button onClick={this.formResetHandler} type="reset" className="basic-btn"  contentKey="Reset"/>
             </div>
         </form>
     );

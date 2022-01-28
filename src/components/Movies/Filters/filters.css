@@ -4,6 +4,8 @@
 }
 
 .form-filters {
+    position: absolute;
+    top: 100px;
     padding: 40px;
     -webkit-backdrop-filter: blur(50px);
     backdrop-filter: blur(50px);
@@ -41,7 +43,7 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../../../filters/arrow-down.svg") no-repeat 15px center;
+    /*background: url("../../../filters/arrow-down.svg") no-repeat 15px center;*/
     padding-left: 40px;
 }
 
@@ -192,6 +194,7 @@
     display: flex;
     justify-content: center;
     position: relative;
+    gap: 40px;
 }
 
 .form-filters__buttons button[type="reset"] {
