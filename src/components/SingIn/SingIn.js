@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import {StyledForm, WrapperForm} from './SignIn/SignIn.scss';
-
-import { Bubble } from 'styled-components/global-styles-components';
-import Input from 'components/common/Input';
-import Button from 'components/common/Button';
-
-
-
+import Form from '../common/input/Form';
+import Input from '../common/input/InputField';
+import Button from '../common/Button/Button';
 
 class SingIn extends Component {
     constructor(props) {
@@ -14,16 +9,16 @@ class SingIn extends Component {
         this.state = {};
     }
 
-    handlerSubmitForm = (event) => {
+    handlerSubmitForm = event => {
         event.preventDefault();
         if (state.isValid) {
             onSubmit({ login: state.login, password: state.password });
-            setState({...initialState, isClear: true});
+            setState({ ...initialState, isClear: true });
         }
     };
 
     changeFieldsValue = (value, event) => {
-        setState((prevState) => ({
+        setState(prevState => ({
             ...prevState,
             [event.target.name]: value,
             isClear: false,
@@ -38,39 +33,47 @@ class SingIn extends Component {
         if (event.code === 'Enter') changeFieldsValue(value, event);
     };
 
-    return (
-            <WrapperForm>
-                <Bubble>
-                    <StyledForm name='signInForm' onSubmit={handlerSubmitForm}>
+    render() {
+        return (
+            <Form className="form frosted-glass-effect" id="form-signin">
+                <div className="fields">
+                    <div className="input-wrapper">
                         <Input
-                            type={InputTypes.text}
-                            name='login'
-                            label={intl.formatMessage({ id: idMessages.loginLabel })}
-                            placeholder={intl.formatMessage({ id: idMessages.loginPlaceholder })}
-                            image={login}
-                            onBlur={handlerBlurInput}
-                            onKeyDown={handlerKeyDownInput}
-                            isClear={state.isClear}
-                            error={state.loginError}
+                            // label={intl.formatMessage({ id: idMessages.loginLabel })}
+                            id={'signin__login'}
+                            type={'text'}
+                            name={'login'}
+                            value={''}
+                            classNameInput={'input-wrapper__input input-login input-register'}
+                            placeholder={'Enter your login'}
+                            // onBlur={handlerBlurInput}
+                            // onKeyDown={handlerKeyDownInput}
+                            // image={login}
+                            // isClear={state.isClear}
+                            // error={state.loginError}
                         />
                         <Input
-                            type={InputTypes.password}
-                            name='password'
-                            label={intl.formatMessage({ id: idMessages.passwordLabel })}
-                            placeholder={intl.formatMessage({ id: idMessages.passwordPlaceholder })}
-                            image={lock}
-                            onBlur={handlerBlurInput}
-                            onKeyDown={handlerKeyDownInput}
-                            isClear={state.isClear}
-                            error={state.passwordError}
+                            // label={intl.formatMessage({ id: idMessages.loginLabel })}
+                            id={'signin__password'}
+                            type={'password'}
+                            name={'password'}
+                            value={''}
+                            classNameInput={'input-wrapper__input input-password input-register'}
+                            placeholder={'Enter your password'}
+                            // onBlur={handlerBlurInput}
+                            // onKeyDown={handlerKeyDownInput}
+                            // image={login}
+                            // isClear={state.isClear}
+                            // error={state.loginError}
                         />
                         <Button type={ButtonTypes.submit}>
                             <FormattedMessage id={idMessages.signIn} />
                         </Button>
-                    </StyledForm>
-                </Bubble>
-            </WrapperForm>
-    );
+                    </div>
+                </div>
+            </Form>
+        );
+    }
 }
 
 export default SingIn;
