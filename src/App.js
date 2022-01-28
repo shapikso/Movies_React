@@ -13,7 +13,8 @@ class App extends Component {
                 <Routes >
                     <Route path="/sing-up" element={<SingUp />} />
                     <Route path="/" element={<SingIn />} />
-                    <Route path="/movies"  element={<Movies />}/>
+                    <Route path="/movies" element={<Movies />} />
+                    <Route path="movie/:id" element={<SingIn />} />
                 </Routes>
             </MainLayout>
         );
