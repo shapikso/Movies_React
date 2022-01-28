@@ -4,9 +4,9 @@ const GenreDetails = ({genres}) => {
     return (
         <div>
             <span className="movie-header">Genres</span>
-            <div className="base-gaps" id="genres">
+            <div className="base-gaps">
                 {genres.map((el) =>
-                    <div key={el} className="genres-info info-block-size" id="genres ">
+                    <div key={el} className="genres-info info-block-size">
                         {el}
                     </div>)}
             </div>

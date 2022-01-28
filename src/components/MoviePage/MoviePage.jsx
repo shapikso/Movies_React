@@ -5,6 +5,7 @@ import MovieDetails from "./MovieDetails/MovieDetails";
 import GenreDetails from "./GenreDetails/GenreDetails";
 import OverviewDetails from "./OverviewDetails/OverviewDetails";
 import Loader from "../common/Loader/Loader";
+import {MOVIE_BY_ID, URL_IMG} from "../../constants/api";
 
 class MoviePage extends Component {
     constructor(props) {
@@ -19,28 +20,19 @@ class MoviePage extends Component {
     }
 
     componentDidMount() {
-        setTimeout(this.getMovieFromApi, 1000);
+        this.getMovieFromApi();
     }
-
-    startLoader = () => {
-        this.setState({isLoading: true});
-    };
-
-    stopLoader = () => {
-        this.setState({isLoading: false});
-    };
 
     getMovieFromApi = async () => {
         try {
-            this.startLoader();
-            const res = await axios.get('http://localhost:3001/movie/?id=13');
+            const res = await axios.get(`${MOVIE_BY_ID}${this.props.match.params.id}`);
             this.setState({film: res.data});
             this.formatRuntime();
         } catch (error) {
             // eslint-disable-next-line no-console
             console.log(error);
         } finally {
-            this.stopLoader();
+            this.setState({isLoading: false});
         }
     }
 
@@ -53,7 +45,7 @@ class MoviePage extends Component {
 
     render() {
         const styles = {
-            background: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${'https://image.tmdb.org/t/p/original/' + this.state.film.backdrop_path})`,
+            background: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${URL_IMG + this.state.film.backdrop_path})`,
             backgroundSize: 'cover'
         };
         return (

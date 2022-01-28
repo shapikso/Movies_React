@@ -1,23 +1,24 @@
 import './App.scss';
 import React, {Component} from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import MainLayout from "./components/MainLayout/MainLayout";
 import SingIn from "./components/SingIn/SingIn";
 import SingUp from "./components/SingUp/SingUp";
 import Movies from "./components/Movies/Movies";
-import MoviePage from "./components/MoviePage/MoviePage";
+import MoviePage from "./components/MoviePage";
+
 
 class App extends Component {
 
     render() {
         return (
             <MainLayout>
-                <Routes>
-                    <Route path="/sing-up" element={<SingUp />} />
-                    <Route path="/" element={<SingIn />} />
-                    <Route path="/movies"  element={<Movies />}/>
-                    <Route path="/movie/:id" element={<MoviePage />}/>
-                </Routes>
+                <Switch>
+                    <Route path="/sing-up"> <SingUp /> </Route>
+                    <Route path="/movies"> <Movies /> </Route>
+                    <Route path="/movie/:id"> <MoviePage /> </Route>
+                    <Route path="/" exact> <SingIn /> </Route>
+                </Switch>
             </MainLayout>
         );
     }
