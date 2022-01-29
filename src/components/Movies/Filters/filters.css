@@ -286,4 +286,12 @@
     width: 300px;
     margin: 0 auto;
 }
+.close {
+    cursor: pointer;
+    font-size: 30px;
+    min-width: 20px;
+    position: absolute;
+    right: -26px;
+    top: -404px;
+}
 

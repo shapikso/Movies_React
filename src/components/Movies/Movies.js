@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './movies.scss';
-import './Movies.scss';
+//import './Movies.scss';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
 import axios from 'axios';
@@ -14,6 +14,20 @@ class Movies extends Component {
         super(props);
         this.state = {
             movies: [],
+            filters: {
+                title: '',
+                language: '',
+                status:  '',
+                release_date_first: '',
+                release_date_last: '',
+                budget_min: 0,
+                budget_max: 500000000,
+                popularity_min: 0,
+                popularity_max: 200,
+                revenue_min: 0,
+                revenue_max: 30000,
+            },
+            isFiltersSet: false,
             currentPage: 1,
             isFiltersHidden : true,
             isLoading: true,
@@ -24,13 +38,31 @@ class Movies extends Component {
         this.getMovies(this.getCurrentUrl(this.state.currentPage));
     }
 
+    setBudget = (minBudget, maxBudget) => this.setState({filters : {...this.state.filters, budget_min: minBudget,budget_max: maxBudget}});
+    setPopularity = (minPopularity, maxPopularity) => this.setState({filters :{...this.state.filters, popularity_min: minPopularity, popularity_max: maxPopularity}});
+    setVote = (minVote, maxVote) => this.setState({filters :{...this.state.filters,revenue_min: minVote,revenue_max: maxVote}});
+    setLanguage = (language) => this.setState({filters :{...this.state.filters,language: language}});
+    setStatus = (status) => this.setState({filters :{...this.state.filters,status: status}});
+    setSearchTitle = (title) => this.setState({filters :{...this.state.filters,title: title}});
+    setMinDate = (date) => this.setState({filters :{...this.state.filters,release_date_first: date}});
+    setMaxDate = (date) => this.setState({filters :{...this.state.filters,release_date_last: date}});
+
     toggleFilters = () =>  this.setState({isFiltersHidden: !this.state.isFiltersHidden});
+    setFilter = (isFiltersSet) => this.setState({isFiltersSet: isFiltersSet})
+
+    getUrl = () => {
+        let result = `${URL_MOVIE}?`;
+        Object.entries(this.state.filters).forEach((element) => {
+            if (element[1] !== '') {
+                result += `&${element[0]}=${element[1].toString().replace(/,/g, '').replace(/ /g, '%20')}`;
+            }
+        });
+        return result;
+    };
 
     getCurrentUrl = (page) => {
-        const filtersURL = localStorage.getItem('filtersURL');
-        const isFilters = localStorage.getItem('isFiltersApply') === 'true';
-        return (isFilters
-            ? `${filtersURL}&page=${page}&per_page=${MOVIE_ON_PAGE}`
+        return (this.state.isFiltersSet
+            ? `${this.getUrl()}&page=${page}&per_page=${MOVIE_ON_PAGE}`
             : `${URL_MOVIE}?page=${page}&per_page=${MOVIE_ON_PAGE}`);
     };
 
@@ -84,7 +116,20 @@ class Movies extends Component {
                     <Button className="button" contentKey="Load More" onClick={this.loadMore} />
                 </div>
                 <div id="filters-modal" className={this.state.isFiltersHidden ? "filters-modal-box hide" : "filters-modal-box" }>
-                    <Filters closeModal={this.toggleFilters} onSubmite={this.submitResetFilters}/>
+                    <Filters closeModal={this.toggleFilters}
+                        onSubmite={this.submitResetFilters}
+                        setBudget={this.setBudget}
+                        setPopularity={this.setPopularity}
+                        setVote={this.setVote}
+                        setLanguage={this.setLanguage}
+                        setStatus={this.setStatus}
+                        setSearchTitle={this.setSearchTitle}
+                        setMinDate={this.setMinDate}
+                        setMaxDate={this.setMaxDate}
+                        filters={this.state.filters}
+                        setFilter={this.setFilter}
+                        clearFilters={this.clearFilters}
+                    />
                 </div>
             </div>
         );
