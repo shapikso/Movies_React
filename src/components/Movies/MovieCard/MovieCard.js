@@ -3,13 +3,14 @@ import React from 'react';
 import { URL_IMG } from '../../../constants/api';
 import { Link } from 'react-router-dom';
 import { formatRuntime, formatRate, getRateState } from '../../../helpers/format';
+import MoviePage from "../../MoviePage/MoviePage";
 
 const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const runtimeFormated = formatRuntime(runtime);
     const formatedRate = formatRate(voteAverage);
     const typeRate = getRateState(voteAverage);
     return (
-        <Link to={`movie/${id}`}>
+        <Link to={`movie/${id}`} element={<MoviePage props={id}/>}>
             <div className="movie-card card">
                 <div className="card-wrapper">
                     <div className="film-poster">
