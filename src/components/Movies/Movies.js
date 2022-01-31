@@ -28,7 +28,6 @@ class Movies extends Component {
                 revenue_min: 0,
                 revenue_max: 30000,
             },
-            isFiltersSet: false,
             currentPage: 1,
             isFiltersHidden : true,
             isLoading: true,

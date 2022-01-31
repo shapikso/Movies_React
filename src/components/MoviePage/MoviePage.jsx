@@ -45,7 +45,6 @@ class MoviePage extends Component {
             background: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${URL_IMG + this.state.film.backdrop_path})`,
             backgroundSize: 'cover'
         };
-        console.log(this.state.film.name);
         return (
             <div>
                 {this.state.isLoading

@@ -1,5 +1,7 @@
 import React from 'react';
 import DoubleRange from "../DoubleRange/DoubleRange";
+import PropTypes from "prop-types";
+
 
 const FiltersRanges = ({ budgetMax, budgetMin, popularityMax, popularityMin, revenueMax, revenueMin,setFilter}) => {
 
@@ -53,6 +55,16 @@ const FiltersRanges = ({ budgetMax, budgetMin, popularityMax, popularityMin, rev
             />
         </div>
     );
+};
+
+FiltersRanges.propTypes = {
+    budgetMax: PropTypes.number.isRequired,
+    budgetMin: PropTypes.number.isRequired,
+    popularityMax: PropTypes.number.isRequired,
+    popularityMin: PropTypes.number.isRequired,
+    revenueMax: PropTypes.number.isRequired,
+    revenueMin: PropTypes.number.isRequired,
+    setFilter : PropTypes.func.isRequired
 };
 
 export default FiltersRanges;

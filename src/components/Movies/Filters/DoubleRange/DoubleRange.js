@@ -1,8 +1,8 @@
 import React from 'react';
-// import RangeInput from "./RangeInput";
-import InputValue from "./InputValue";
 import Slider from "rc-slider";
 import "./slider.scss";
+import Input from "../../../common/input/InputField";
+import PropTypes from "prop-types";
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
@@ -10,8 +10,8 @@ const DoubleRange = ({title,minValue,maxValue, step, setRange, minInputValue, ma
     <div className="form-filters__ranges__item double-range">
         <div className="double-range__title">{title}</div>
         <div className="double-range__info">
-            <InputValue value={minInputValue} />
-            <InputValue value={maxInputValue} />
+            <Input value={minInputValue} className="double-range__info-min" />
+            <Input value={maxInputValue} className="double-range__info-max" />
         </div>
         <div className="double-range__place">
             <Range
@@ -25,5 +25,14 @@ const DoubleRange = ({title,minValue,maxValue, step, setRange, minInputValue, ma
     </div>
 );
 
+DoubleRange.propTypes = {
+    minValue: PropTypes.string.isRequired,
+    maxValue: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    step: PropTypes.string.isRequired,
+    maxInputValue: PropTypes.number.isRequired,
+    minInputValue: PropTypes.number.isRequired,
+    setRange : PropTypes.func.isRequired
+};
 
 export default DoubleRange;
