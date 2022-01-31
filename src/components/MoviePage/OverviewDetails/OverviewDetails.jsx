@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const OverviewDetails = ({overview}) => (
     <div>
@@ -8,5 +9,9 @@ const OverviewDetails = ({overview}) => (
         </div>
     </div>
 );
+
+OverviewDetails.propTypes = {
+    overview: PropTypes.string,
+};
 
 export default OverviewDetails;
