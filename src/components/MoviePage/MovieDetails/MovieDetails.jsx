@@ -1,6 +1,7 @@
 import React from 'react';
 import '../MoviePage.scss';
 import {ADULT_FALSE, ADULT_TRUE} from "../../../constants/formatMovie";
+import PropTypes from 'prop-types';
 
 const MovieDetails = ({film, hours, minutes}) => (
     <ul className="base-gaps">
@@ -12,5 +13,11 @@ const MovieDetails = ({film, hours, minutes}) => (
         <li className="small-info info-block-size">movie rate: {film.vote_average}</li>
     </ul>
 );
+
+MovieDetails.propTypes = {
+    hours: PropTypes.number,
+    minutes: PropTypes.number,
+    film: PropTypes.object,
+};
 
 export default MovieDetails;

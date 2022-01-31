@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const GenreDetails = ({genres}) => (
     <div>
@@ -11,5 +12,9 @@ const GenreDetails = ({genres}) => (
         </div>
     </div>
 );
+
+GenreDetails.propTypes = {
+    genres: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default GenreDetails;
