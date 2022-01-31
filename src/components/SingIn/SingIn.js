@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Form from '../common/input/Form';
 import Input from '../common/input/InputField';
-// import Button from '../common/Button/Button';
 
 class SingIn extends Component {
     constructor(props) {
@@ -12,38 +11,14 @@ class SingIn extends Component {
         };
     }
 
-    handleChangeUser = (value) => {
-        // console.log(event);
-        this.setState({ user: value });
-    }
+    handleChangeUser = (value) => this.setState({ user: value });
 
-    handleChangePassword = (value) => {
-        // console.log(event);
-        this.setState({ password: value});
-    }
+    handleChangePassword = (value) => this.setState({ password: value});
 
     handlerSubmitForm = event => {
         event.preventDefault();
         console.log("submit");
-        // onSubmit({ login: state.login, password: state.password });
-        // setState({ ...initialState, isClear: true });
     };
-
-    // changeFieldsValue = (value, event) => {
-    //     setState(prevState => ({
-    //         ...prevState,
-    //         [event.target.name]: value,
-    //         isClear: false,
-    //     }));
-    // };
-
-    // handlerBlurInput = (value, event) => {
-    //     changeFieldsValue(value, event);
-    // };
-
-    // handlerKeyDownInput = (value, event) => {
-    //     if (event.code === 'Enter') changeFieldsValue(value, event);
-    // };
 
     render() {
         console.log(this.state);
@@ -59,13 +34,6 @@ class SingIn extends Component {
                             value={this.state.user}
                             placeholder={'Enter your login'}
                             autocomplete="off"
-                            // onBlur={this.props.onBlur}
-                            // onKeyDown={this.propsonKeyDown}
-                            // onBlur={handlerBlurInput}
-                            // onKeyDown={handlerKeyDownInput}
-                            // image={login}
-                            // isClear={state.isClear}
-                            // error={state.loginError}
                         />
                         <Input
                             label={"Password"}
@@ -74,18 +42,8 @@ class SingIn extends Component {
                             value={this.state.password}
                             placeholder={'Enter your password'}
                             autocomplete="off"
-                            // onBlur={this.props.onBlur}
-                            // onKeyDown={this.propsonKeyDown}
                             onChange={this.handleChangePassword}
-                            // onBlur={handlerBlurInput}
-                            // onKeyDown={handlerKeyDownInput}
-                            // image={login}
-                            // isClear={state.isClear}
-                            // error={state.loginError}
                         />
-                        {/* <Button type={ButtonTypes.submit}>
-                            <FormattedMessage id={idMessages.signIn} />
-                        </Button> */}
                     </div>
                 </div>
             </Form>
@@ -94,25 +52,3 @@ class SingIn extends Component {
 }
 
 export default SingIn;
-
-// import React, { Component } from 'react';
-// import Form from '../common/input/Form';
-// import Input from '../common/input/InputField';
-// import Button from '../common/Button/Button';
-
-// class SingIn extends Component{
-//     constructor(props) {
-//         super(props);
-//          this.state = {};
-//     }
-
-//     onSubmit=(e)=>{
-//         e.preventDefault();
-
-//     }
-//     render() {
-//         return(
-//         <Form children={this.props.children} onSubmit={this.onSubmit} />
-//         )}
-// }
-// export default SingIn;
