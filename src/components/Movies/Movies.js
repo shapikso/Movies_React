@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './movies.scss';
+import './films.scss';
 import './Movies.scss';
-import React, { Component } from 'react';
 import axios from 'axios';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
