@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './filters.css';
-import Select from "./Selector/Select";
-import {movieLanguages,movieStatus} from '../../../constants/selectors';
-import FilterInput from "./Input/FilterInput";
-import DoubleRange from "./DoubleRange/DoubleRange";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import Button from "../../common/Button/Button";
+import FilterHeaders from "./FilterHeaders/FilterHeaders";
+import FiltersRanges from "./FiltersRanges/FiltersRanges";
+import FilterDate from "./FilterDate/FilterDate";
+import FiltersButtons from "./FiltersButtons/FiltersButtons";
 
 class Filters extends Component {
     constructor(props) {
@@ -17,76 +14,41 @@ class Filters extends Component {
     }
 
  formSubmitHandler = () => {
-     this.props.setFilter(true);
-     setTimeout(()=>{
-         this.props.closeModal();
-         this.props.onSubmite();
-         this.setState({isResetDisabled: false});
-     },50);
-
+     this.props.closeModal();
+     this.props.onSubmite();
+     this.setState({isResetDisabled: false});
  };
 
 formResetHandler = () => {
-    this.props.setFilter(false);
-    setTimeout(()=>{
+    this.props.clearFilters();
+    setTimeout(() => {
         this.props.closeModal();
         this.props.onSubmite();
         this.setState({isResetDisabled: true});
-    },50);
+    },1);
 };
 
 render() {
+    const {title, budget_max, budget_min, popularity_max,popularity_min, revenue_max, revenue_min, release_date_first, release_date_last} = this.props.filters;
+    const {setFilter, closeModal} = this.props;
     return (
         <form id="filters" name="filters" className="form-filters frosted-glass-effect" action="#">
-            <div className="form-filters__header">
-                <FilterInput value={this.props.filters.title} setSearchTitle={this.props.setSearchTitle} />
-                <Select setDelector={this.props.setStatus} options={movieStatus} />
-                <Select setDelector={this.props.setLanguage} options={movieLanguages} />
-            </div>
-            <div className="form-filters__ranges">
-                <DoubleRange setRange={this.props.setBudget}
-                    title="Budget, $"
-                    step="100000"
-                    minValue="0"
-                    maxValue="500000000"
-                    maxInputValue={this.props.filters.budget_max}
-                    minInputValue={this.props.filters.budget_min}
-                />
-                <DoubleRange setRange={this.props.setPopularity}
-                    title="Popularity"
-                    step="1" minValue="0"
-                    maxValue="200"
-                    maxInputValue={this.props.filters.popularity_max}
-                    minInputValue={this.props.filters.popularity_min}
-                />
-                <DoubleRange setRange={this.props.setVote}
-                    title="Vote count"
-                    step="1"
-                    minValue="0"
-                    maxValue="30000"
-                    maxInputValue={this.props.filters.revenue_max}
-                    minInputValue={this.props.filters.revenue_min}
-                />
-            </div>
-            <div className="form-filters__release-date">
-                <div id="release-date-first" className="form-filters__release-date__item date-picker">
-                    <DatePicker selected={this.props.filters.release_date_first}
-                        onChange={(date) => this.props.setMinDate(date)}
-                        placeholderText="Select Date.."
-                        className="basic-field date-picker__input" />
-                </div>
-                <div id="release-date-last" className="form-filters__release-date__item date-picker">
-                    <DatePicker selected={this.props.filters.release_date_last}
-                        onChange={(date) => this.props.setMaxDate(date)}
-                        placeholderText="Select Date.."
-                        className="basic-field date-picker__input" />
-                </div>
-            </div>
-            <div className="form-filters__buttons">
-                <Button onClick={this.formSubmitHandler} className="basic-btn" contentKey ="Submit"/>
-                <Button onClick={this.formResetHandler} type="reset" className="basic-btn"  contentKey="Reset"/>
-                <span onClick={this.props.closeModal} className="close">x</span>
-            </div>
+            <FilterHeaders title={title} setFilter={setFilter}/>
+            <FiltersRanges
+                budgetMax={budget_max}
+                budgetMin={budget_min}
+                popularityMax={popularity_max}
+                popularityMin={popularity_min}
+                revenueMin={revenue_min}
+                revenueMax={revenue_max}
+                setFilter={setFilter}
+            />
+            <FilterDate
+                releaseDateFirst={release_date_first}
+                releaseDateLast={release_date_last}
+                setFilter={setFilter}
+            />
+            <FiltersButtons closeModal={closeModal} formResetHandler={this.formResetHandler} formSubmitHandler={this.formSubmitHandler}/>
         </form>
     );
 }

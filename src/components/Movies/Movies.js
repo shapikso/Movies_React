@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './movies.scss';
-//import './Movies.scss';
+import './Movies.scss';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
 import axios from 'axios';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
 import Loader from '../common/Loader/Loader';
 import Filters from "./Filters/Filters";
+import {normalizeFilters} from "../../helpers/format";
 
 
 class Movies extends Component {
@@ -35,41 +36,30 @@ class Movies extends Component {
     }
 
     componentDidMount() {
-        this.getMovies(this.getCurrentUrl(this.state.currentPage));
+        this.getMovies();
     }
 
-    setBudget = (minBudget, maxBudget) => this.setState({filters : {...this.state.filters, budget_min: minBudget,budget_max: maxBudget}});
-    setPopularity = (minPopularity, maxPopularity) => this.setState({filters :{...this.state.filters, popularity_min: minPopularity, popularity_max: maxPopularity}});
-    setVote = (minVote, maxVote) => this.setState({filters :{...this.state.filters,revenue_min: minVote,revenue_max: maxVote}});
-    setLanguage = (language) => this.setState({filters :{...this.state.filters,language: language}});
-    setStatus = (status) => this.setState({filters :{...this.state.filters,status: status}});
-    setSearchTitle = (title) => this.setState({filters :{...this.state.filters,title: title}});
-    setMinDate = (date) => this.setState({filters :{...this.state.filters,release_date_first: date}});
-    setMaxDate = (date) => this.setState({filters :{...this.state.filters,release_date_last: date}});
+    setFilter = (key,value) => this.setState({filters : {...this.state.filters,[key]: value}});
 
     toggleFilters = () =>  this.setState({isFiltersHidden: !this.state.isFiltersHidden});
-    setFilter = (isFiltersSet) => this.setState({isFiltersSet: isFiltersSet})
+    clearFilters = () => this.setState({  filters: {
+        title: '',
+        language: '',
+        status:  '',
+        release_date_first: '',
+        release_date_last: '',
+        budget_min: 0,
+        budget_max: 500000000,
+        popularity_min: 0,
+        popularity_max: 200,
+        revenue_min: 0,
+        revenue_max: 30000,
+    }})
 
-    getUrl = () => {
-        let result = `${URL_MOVIE}?`;
-        Object.entries(this.state.filters).forEach((element) => {
-            if (element[1] !== '') {
-                result += `&${element[0]}=${element[1].toString().replace(/,/g, '').replace(/ /g, '%20')}`;
-            }
-        });
-        return result;
-    };
-
-    getCurrentUrl = (page) => {
-        return (this.state.isFiltersSet
-            ? `${this.getUrl()}&page=${page}&per_page=${MOVIE_ON_PAGE}`
-            : `${URL_MOVIE}?page=${page}&per_page=${MOVIE_ON_PAGE}`);
-    };
-
-    getMovies = async (URL) => {
+    getMovies = async (page) => {
         try {
             this.setState({ isLoading: true });
-            const { data } = await axios.get(URL);
+            const { data } = await axios.get(URL_MOVIE,{params: {...normalizeFilters(this.state.filters), page: page || this.state.currentPage, per_page: MOVIE_ON_PAGE}});
             this.setState({movies: [...this.state.movies, ...data], currentPage: this.state.currentPage+1});
         } finally {
             this.setState({ isLoading: false });
@@ -79,9 +69,7 @@ class Movies extends Component {
     setPage = (page) => this.setState({ currentPage: page });
 
     loadMore = (page) => {
-        console.log( this.state.currentPage);
-        console.log(page || this.state.currentPage + 1);
-        this.getMovies(this.getCurrentUrl(page || this.state.currentPage));
+        this.getMovies(page);
     }
 
     submitResetFilters = () => {
@@ -118,14 +106,6 @@ class Movies extends Component {
                 <div id="filters-modal" className={this.state.isFiltersHidden ? "filters-modal-box hide" : "filters-modal-box" }>
                     <Filters closeModal={this.toggleFilters}
                         onSubmite={this.submitResetFilters}
-                        setBudget={this.setBudget}
-                        setPopularity={this.setPopularity}
-                        setVote={this.setVote}
-                        setLanguage={this.setLanguage}
-                        setStatus={this.setStatus}
-                        setSearchTitle={this.setSearchTitle}
-                        setMinDate={this.setMinDate}
-                        setMaxDate={this.setMaxDate}
                         filters={this.state.filters}
                         setFilter={this.setFilter}
                         clearFilters={this.clearFilters}

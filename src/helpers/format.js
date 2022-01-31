@@ -16,3 +16,5 @@ export const getRateState = (rate) => {
     if (!Number.isFinite(rateToNumber) || rateToNumber < 7) return BAD_RATE;
     return GOOD_RATE;
 };
+
+export const normalizeFilters = (filters) => Object.entries(filters).reduce((acc, [key, value]) => value || value === 0 ? {...acc, [key]: value} : acc, {});
