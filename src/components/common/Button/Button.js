@@ -14,11 +14,12 @@ const Button = ({
     if (className) {
         btnClasses.push(className);
     }
+    const handleClick = () => onClick();
     return (
         <button
             className={btnClasses.join(' ')}
             type={type}
-            onClick={onClick}
+            onClick={handleClick}
             disabled={isDisabled}
         >
             {contentKey}
