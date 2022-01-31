@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './movies.scss';
 import './Movies.scss';
+import React, { Component } from 'react';
+import axios from 'axios';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
-import axios from 'axios';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
 import Loader from '../common/Loader/Loader';
 import Filters from "./Filters/Filters";
@@ -91,13 +92,13 @@ class Movies extends Component {
                             <MovieCard
                                 key={element.id}
                                 id={element.id}
-                                backdrop_path={element.backdrop_path}
+                                backdropPath={element.backdrop_path}
                                 title={element.title}
-                                runtime = { element.runtime }
-                                vote_average= {element.vote_average}
+                                runtime={ element.runtime }
+                                voteAverage={element.vote_average}
                             />
                         ))) : (
-                            <h1>You have no images!</h1>
+                            <h1>You have no films!</h1>
                         )}
                 </div>
                 <div className="center">
