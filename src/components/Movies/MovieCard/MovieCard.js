@@ -4,6 +4,7 @@ import { URL_IMG } from '../../../constants/api';
 import { Link } from 'react-router-dom';
 import { formatRuntime, formatRate, getRateState } from '../../../helpers/format';
 import MoviePage from "../../MoviePage/MoviePage";
+import PropTypes from 'prop-types';
 
 const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const runtimeFormated = formatRuntime(runtime);
@@ -31,6 +32,14 @@ const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
             </div>
         </Link >
     );
+};
+
+MovieCard.propTypes = {
+    id: PropTypes.number.isRequired,
+    backdropPath: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    runtime: PropTypes.number.isRequired,
+    voteAverage: PropTypes.number.isRequired,
 };
 
 export default MovieCard;

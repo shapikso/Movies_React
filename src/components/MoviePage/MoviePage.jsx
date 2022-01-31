@@ -49,7 +49,7 @@ class MoviePage extends Component {
         return (
             <div>
                 {this.state.isLoading
-                    ? <Loader/>
+                    ? <Loader className={'loader-full-screen'}/>
                     :
                     <div>
                         <div className="title">

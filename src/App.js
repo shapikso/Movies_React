@@ -7,7 +7,6 @@ import SingUp from "./components/SingUp/SingUp";
 import Movies from "./components/Movies/Movies";
 import MoviePage from "./components/MoviePage";
 
-
 class App extends Component {
 
     render() {

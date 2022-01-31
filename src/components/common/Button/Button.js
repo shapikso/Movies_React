@@ -28,11 +28,11 @@ const Button = ({
 };
 
 Button.propTypes = {
-    type: PropTypes.oneOf(['button', 'submit']),
+    type: PropTypes.oneOf(['button', 'submit', 'reset']),
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     onClick: PropTypes.func,
-    contentKey: PropTypes.string.isRequired,
+    contentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.obj]),
 };
 
 export default Button;
