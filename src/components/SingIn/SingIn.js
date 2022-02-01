@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {withRouter} from "react-router";
 import axios from 'axios';
-import Form from '../common/input/Form';
-import Input from '../common/input/InputField';
-import { URL_SIGN_IN, MESSAGE_ERROR } from '../../constants/api';
+import Form from '../common/Input/Form';
+import Input from '../common/Input/InputField';
+import { URL_SIGN_IN} from '../../constants/api';
 import Button from '../common/Button/Button';
 import '../SingIn/SingIn.scss';
+import {isValidLogin, isValidPassword} from '../../helpers/validation';
 
 class SingIn extends Component {
     constructor(props) {
@@ -13,6 +14,10 @@ class SingIn extends Component {
         this.state = {
             user: '',
             password: '',
+            error: {
+                user: '',
+                password: '',
+            },
         };
     }
 
@@ -20,33 +25,32 @@ class SingIn extends Component {
 
     handleChangePassword = value => this.setState({ password: value });
 
-    handleSubmitFormSignIn = event => {
-        console.log(event);
-        event.preventDefault();
-        const responseSignIn = this.postSignIn();
-        if (responseSignIn.token) {
-            localStorage.setItem('token', responseSignIn.token);
-            this.props.history.push('/movies');
-        } else {
-            return MESSAGE_ERROR;
-        }
-    };
+    handleChangePasswordInput = () =>{
+        const error = isValidPassword(this.state.password);
+        this.setState({error: {...this.state.error,password: error}});
+    }
+    handleChangeLoginInput = () =>{
+        const error = isValidLogin(this.state.user);
+        this.setState({error: {...this.state.error,user: error}});
+    }
 
-    postSignIn = async () => {
+    handleSubmitFormSignIn = async (event) => {
+        event.preventDefault();
         try {
             // helpers.setButtonLoader(domElements.signInButton);
             //возможно валидация
             const body = { login: this.state.user, password: this.state.password };
-            const response = await axios.post(URL_SIGN_IN, body);
-            const { headers } = response;
-            return { token: headers.token };
-        }  finally {
+            const {headers} = await axios.post(URL_SIGN_IN, body);
+            localStorage.setItem('token', headers.token);
+            this.props.history.push('/movies');
+        } catch (error){
+            console.log(error);
+        } finally {
             // helpers.removeButtonLoader(domElements.signInButton);
         }
     };
 
     render() {
-        console.log(this.state);
         return (
             <div className="container main__container">
                 <div className="form-wrapper">
@@ -60,7 +64,10 @@ class SingIn extends Component {
                                     value={this.state.user} 
                                     placeholder={'Enter your login'} 
                                     autocomplete="off" 
-                                    onChange={this.handleChangeUser} />
+                                    onChange={this.handleChangeUser}
+                                    onBlur={this.handleChangeLoginInput}
+                                    error={this.state.error.user}
+                                />
                                 <Input
                                     label={'Password'}
                                     type={'password'}
@@ -69,6 +76,8 @@ class SingIn extends Component {
                                     placeholder={'Enter your password'}
                                     autocomplete="off"
                                     onChange={this.handleChangePassword}
+                                    onBlur={this.handleChangePasswordInput}
+                                    error={this.state.error.password}
                                 />
                                 <Button 
                                     type={'button'} 

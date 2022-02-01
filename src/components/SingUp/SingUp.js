@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from "react-router";
 import axios from 'axios';
-import Form from '../common/input/Form';
-import Input from '../common/input/InputField';
+import Form from '../common/Input/Form';
+import Input from '../common/Input/InputField';
 import Button from '../common/Button/Button';
-import { URL_SIGN_UP } from '../../constants/api';
+import {URL_SIGN_UP} from '../../constants/api';
+import {isValidLogin, isValidName, isValidPassword} from '../../helpers/validation';
+import {normalizeFilters} from '../../helpers/format';
 
 class SingUp extends Component {
     constructor(props) {
@@ -13,88 +15,106 @@ class SingUp extends Component {
             firstName: '',
             lastName: '',
             userName: '',
-            password: ''
+            password: '',
+            isLoading:false,
+            error: {
+                firstName: '',
+                lastName: '',
+                userName: '',
+                password: '',
+            },
         };
     }
-    handleChangeFirstName = value => this.setState({ firstName: value });
 
-    handleChangeLastName = value => this.setState({ lastName: value });
+    handleChangeFirstName = value => this.setState({firstName: value});
 
-    handleChangeLogin = value => this.setState({ userName: value });
+    handleChangeLastName = value => this.setState({lastName: value});
 
-    handleChangePassword = value => this.setState({ password: value });
+    handleChangeLogin = value => this.setState({userName: value});
+
+    handleChangePassword = value => this.setState({password: value});
 
     // setFilter = (key,value) => this.setState({filters : {...this.state.filters,[key]: value}});
 
-    handleSubmitFormSignUp = event =>  {
-        console.log(event);
-        event.preventDefault();
-        const responseSignUp = this.postSignUp();
-        if (responseSignUp.status === '200') {
-            this.props.history.push('/movies');
-        }
+    handleChangeFirstNameInput = () =>{
+        const error = isValidName(this.state.firstName);
+        this.setState({error: {...this.state.error,firstName: error}});
     }
-    
-    postSignUp = async () => {
+    handleChangeLastNameInput = () =>{
+        const error = isValidName(this.state.lastName);
+        this.setState({error: {...this.state.error,lastName: error}});
+    }
+    handleChangePasswordInput = () =>{
+        const error = isValidPassword(this.state.password);
+        this.setState({error: {...this.state.error, password: error}});
+    }
+    handleChangeLoginInput = () =>{
+        const error = isValidLogin(this.state.userName);
+        this.setState({error: {...this.state.error,userName: error}});
+    }
+
+
+    handleSubmitFormSignUp = async (event) => {
+        event.preventDefault();
+        if(Object.keys(normalizeFilters(this.state.error)).length || !this.state.password) return;
         try {
-            const body = { firstName: this.state.firstName, lastName: this.state.lastName, userName: this.state.userName,password: this.state.password };
+            this.setState({isLoading:true});
+            const body = {
+                first_name: this.state.firstName,
+                last_name: this.state.lastName,
+                login: this.state.userName,
+                password: this.state.password
+            };
             const response = await axios.post(URL_SIGN_UP, body);
-            const { headers } = response;
-            return { status: headers.status };
-        } catch (error) {
-            return error;
-        }    
+            const {headers} = response;
+            this.props.history.push('/');
+            return {status: headers.status};
+        } finally {
+            this.setState({isLoading:false});
+        }
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className="container main__container">
                 <div className="form-wrapper">
-                    <Form onSubmit={this.handleSubmitFormSignIn}>
+                    <Form onSubmit={this.handleSubmitFormSignUp}>
                         <div className="fields">
                             <div className="input-wrapper">
-                                <Input 
-                                    label={'First Name'} 
-                                    type={'text'} 
-                                    name={'First Name'} 
-                                    value={this.state.firstName} 
-                                    placeholder={'Enter your login'} 
-                                    autocomplete="off" 
-                                    onChange={this.handleChangeFirstName} />
+                                <Input
+                                    label={'First Name'}
+                                    value={this.state.firstName}
+                                    placeholder={'Enter your login'}
+                                    onChange={this.handleChangeFirstName}
+                                    onBlur={this.handleChangeFirstNameInput}
+                                    error={this.state.error.firstName}
+                                />
                                 <Input
                                     label={'Last Name'}
-                                    type={'text'}
-                                    name={'Last Name'}
-                                    value={this.state.LastName}
+                                    value={this.state.lastName}
                                     placeholder={'Enter your password'}
-                                    autocomplete="off"
                                     onChange={this.handleChangeLastName}
+                                    onBlur={this.handleChangeLastNameInput}
+                                    error={this.state.error.lastName}
                                 />
                                 <Input
                                     label={'Login'}
-                                    type={'text'}
-                                    name={'Login'}
                                     value={this.state.userName}
                                     placeholder={'Enter your password'}
-                                    autocomplete="off"
                                     onChange={this.handleChangeLogin}
+                                    onBlur={this.handleChangeLoginInput}
+                                    error={this.state.error.userName}
                                 />
                                 <Input
                                     label={'Password'}
                                     type={'password'}
-                                    name={'Password'}
                                     value={this.state.password}
                                     placeholder={'Enter your password'}
-                                    autocomplete="off"
                                     onChange={this.handleChangePassword}
+                                    onBlur={this.handleChangePasswordInput}
+                                    error={this.state.error.password}
                                 />
-                                <Button 
-                                    type={'button'} 
-                                    isDisabled={false} 
-                                    className={''} 
-                                    onClick={this.handleSubmitFormSignIn} 
-                                    contentKey={'SUBMIT'} />
+                                <Button type="submit" contentKey={'SUBMIT'} isLoading={this.state.isLoading}/>
                             </div>
                         </div>
                     </Form>

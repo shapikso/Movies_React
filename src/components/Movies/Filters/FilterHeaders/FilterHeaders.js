@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from "../Selector/Select";
 import {movieLanguages, movieStatus} from "../../../../constants/selectors";
-import Input from "../../../common/input/InputField";
+import Input from "../../../common/Input/InputField";
 
 const FilterHeaders = ({setFilter, title}) => {
     const setStatus = (status) => setFilter('status', status);
