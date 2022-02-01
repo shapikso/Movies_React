@@ -12,22 +12,10 @@ class App extends Component {
         return (
             <MainLayout>
                 <Switch>
-                    <Route path="/sing-up">
-                        {' '}
-                        <SingUp />{' '}
-                    </Route>
-                    <Route path="/movies">
-                        {' '}
-                        <Movies />{' '}
-                    </Route>
-                    <Route path="/movie/:id">
-                        {' '}
-                        <MoviePage />{' '}
-                    </Route>
-                    <Route path="/" exact>
-                        {' '}
-                        <SingIn />{' '}
-                    </Route>
+                    <Route path='/sing-up'> <SingUp /> </Route>
+                    <Route path='/movies'> <Movies /> </Route>
+                    <Route path='/movie/:id'> <MoviePage /> </Route>
+                    <Route path='/' exact> <SingIn /> </Route>
                 </Switch>
             </MainLayout>
         );
