@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DoubleRange from '../DoubleRange/DoubleRange';
 
-
-
 const FiltersRanges = ({ budgetMax, budgetMin, popularityMax, popularityMin, revenueMax, revenueMin,setFilter}) => {
 
     const setBudget = (minBudget, maxBudget) => {
