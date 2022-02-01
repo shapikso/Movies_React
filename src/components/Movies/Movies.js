@@ -9,9 +9,6 @@ import Filters from './Filters/Filters';
 import { normalizeFilters } from '../../helpers/format';
 import { scrollToDownPage } from '../../helpers/scroll';
 import {FILTERS_INIT} from '../../constants/filters';
-import Loader from '../common/Loader/Loader';
-
-
 
 class Movies extends Component {
     constructor(props) {
