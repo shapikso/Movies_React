@@ -1,17 +1,31 @@
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px;
-}
-
-.frosted-glass-effect {
+.form .frosted-glass-effect {
     background: linear-gradient(155deg, rgba(255, 255, 255, 0.2) -50%, rgba(255, 255, 255, 0.05) 80%);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 25px;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
+
+.form::before,
+.form::after {
+    content: '';
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(225.82deg, #352f44 24.16%, #5c5470 87.91%);
+    position: absolute;
+}
+
+.frosted-glass-effect::before {
+    left: -85px;
+    bottom: -80px;
+}
+
+.frosted-glass-effect::after {
+    right: -75px;
+    top: -70px;
+}
+
 .invalid {
     position: absolute;
     width: 300px;
@@ -21,10 +35,17 @@ form {
     bottom: -5px;
 }
 
+.form {
+    position: relative;
+    z-index: 10;
+    padding: 50px;
+}
+
 input.error {
     border-color: var(--primary-color-invalid);
 }
-.relative-wrapper{
+
+.relative-wrapper {
     display: flex;
     flex-direction: column;
     position: relative;
