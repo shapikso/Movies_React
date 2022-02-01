@@ -1,5 +1,5 @@
 import './App.scss';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import MainLayout from './components/MainLayout/MainLayout';
 import SingIn from './components/SingIn/SingIn';
@@ -8,7 +8,6 @@ import Movies from './components/Movies/Movies';
 import MoviePage from './components/MoviePage';
 
 class App extends Component {
-
     render() {
         return (
             <MainLayout>

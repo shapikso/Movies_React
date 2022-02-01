@@ -1,0 +1,31 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+}
+
+.frosted-glass-effect {
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.2) -50%, rgba(255, 255, 255, 0.05) 80%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+.invalid {
+    position: absolute;
+    width: 300px;
+    height: 22px;
+    font-size: 14px;
+    color: var(--primary-color-invalid);
+    bottom: -5px;
+}
+
+input.error {
+    border-color: var(--primary-color-invalid);
+}
+.relative-wrapper{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}

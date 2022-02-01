@@ -11,7 +11,6 @@
     backdrop-filter: blur(50px);
     min-width: 560px;
     max-width: 1020px;
-    height: 500px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -88,10 +87,11 @@
 
 .double-range__info-min,
 .double-range__info-max {
-    width: 48%;
+    width: 97%;
     background: none;
     color: var(--light-primary-color);
     padding: 10px;
+    text-align: center;
 }
 
 .double-range__info-max {
@@ -184,6 +184,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
+    width: 880px;
 }
 
 .form-filters__release-date__item {
@@ -203,7 +204,7 @@
     width: 100%;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -285px;
 }
 
 .date-picker {
@@ -291,7 +292,7 @@
     font-size: 30px;
     min-width: 20px;
     position: absolute;
-    right: -26px;
-    top: -404px;
+    right: -340px;
+    top: -480px;
 }
 

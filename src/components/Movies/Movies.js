@@ -35,7 +35,7 @@ class Movies extends Component {
             filters: FILTERS_INIT,
         });
 
-    getMovies = async (page) => {
+    getMovies = async page => {
         try {
             this.setState({ isLoading: true });
             const { data } = await axios.get(URL_MOVIE, {
@@ -52,15 +52,15 @@ class Movies extends Component {
         }
     };
 
-    setPage = (page) => this.setState({ currentPage: page });
+    setPage = page => this.setState({ currentPage: page });
 
-    loadMore = (page) => {
+    loadMore = (e,page) => {
         this.getMovies(page);
     };
 
-    submitResetFilters = () => {
+    submitResetFilters = (e) => {
         this.setState({ currentPage: 1, movies: [] });
-        this.loadMore(1);
+        this.loadMore(e,1);
     };
 
     render() {
@@ -89,17 +89,8 @@ class Movies extends Component {
                         onClick={this.loadMore}
                     />
                 </div>
-                <div
-                    id="filters-modal"
-                    className={this.state.isFiltersHidden ? 'filters-modal-box hide' : 'filters-modal-box'}
-                >
-                    <Filters
-                        closeModal={this.toggleFilters}
-                        onSubmite={this.submitResetFilters}
-                        filters={this.state.filters}
-                        setFilter={this.setFilter}
-                        clearFilters={this.clearFilters}
-                    />
+                <div id="filters-modal" className={this.state.isFiltersHidden ? 'filters-modal-box hide' : 'filters-modal-box'}>
+                    <Filters closeModal={this.toggleFilters} onSubmite={this.submitResetFilters} filters={this.state.filters} setFilter={this.setFilter} clearFilters={this.clearFilters} />
                 </div>
             </div>
         );
