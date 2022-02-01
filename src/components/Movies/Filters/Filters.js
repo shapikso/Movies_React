@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './filters.css';
-import FilterHeaders from "./FilterHeaders/FilterHeaders";
-import FiltersRanges from "./FiltersRanges/FiltersRanges";
-import FilterDate from "./FilterDate/FilterDate";
-import FiltersButtons from "./FiltersButtons/FiltersButtons";
-import PropTypes from "prop-types";
+import FilterHeaders from './FilterHeaders/FilterHeaders';
+import FiltersRanges from './FiltersRanges/FiltersRanges';
+import FilterDate from './FilterDate/FilterDate';
+import FiltersButtons from './FiltersButtons/FiltersButtons';
 
 class Filters extends Component {
     constructor(props) {

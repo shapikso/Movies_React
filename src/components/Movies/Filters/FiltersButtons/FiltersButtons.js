@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from "../../../common/Button/Button";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import Button from '../../../common/Button/Button';
 
 const FiltersButtons = ({formSubmitHandler, formResetHandler, closeModal}) =>
     (

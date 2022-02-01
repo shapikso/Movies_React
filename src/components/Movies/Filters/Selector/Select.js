@@ -1,6 +1,6 @@
 import React from 'react';
-import SelectItem from "./SelectItem";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import SelectItem from './SelectItem';
 
 const Select = ({options,setSelector}) => {
     const clickHandler = (e)=> setSelector(e.target.value);

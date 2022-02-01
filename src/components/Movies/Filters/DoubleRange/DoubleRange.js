@@ -1,8 +1,8 @@
 import React from 'react';
-import Slider from "rc-slider";
-import "./slider.scss";
-import Input from "../../../common/input/InputField";
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import Slider from 'rc-slider';
+import './slider.scss';
+import Input from '../../../common/input/InputField';
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
