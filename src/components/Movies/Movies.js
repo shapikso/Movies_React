@@ -70,7 +70,7 @@ class Movies extends Component {
 
     setPage = page => this.setState({ currentPage: page });
 
-    loadMore = page => {
+    loadMore = (e,page) => {
         this.getMovies(page);
     };
 

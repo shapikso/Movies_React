@@ -87,10 +87,11 @@
 
 .double-range__info-min,
 .double-range__info-max {
-    width: 48%;
+    width: 97%;
     background: none;
     color: var(--light-primary-color);
     padding: 10px;
+    text-align: center;
 }
 
 .double-range__info-max {

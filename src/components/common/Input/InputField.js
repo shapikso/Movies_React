@@ -10,6 +10,7 @@ const InputField = ({
     placeholder,
     onChange,
     error,
+    readOnly = false,
     onBlur,
 }) => {
     const handleChange = (e) => onChange(e.target.value);
@@ -28,6 +29,7 @@ const InputField = ({
                 name={label}
                 value={value}
                 placeholder={placeholder}
+                readOnly={readOnly}
                 autoComplete="off"
                 onChange={handleChange}
                 onBlur={handleBlur}

@@ -16,7 +16,7 @@ const Button = ({ type = 'button', isDisabled = false, className, onClick, conte
 };
 
 Button.propTypes = {
-    type: PropTypes.oneOf(['button', 'submit']),
+    type: PropTypes.oneOf(['button', 'submit', 'reset']),
     className: PropTypes.string,
     isDisabled: PropTypes.bool,
     onClick: PropTypes.func,
