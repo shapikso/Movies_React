@@ -25,8 +25,8 @@ class SingIn extends Component {
         event.preventDefault();
         const responseSignIn = this.postSignIn();
         if (responseSignIn.token) {
-            localStorage.setItem(Date.now(), JSON.stringify(responseSignIn));
-            setTimeout(() => this.props.history.push('/movies'), 250);
+            localStorage.setItem('token', responseSignIn.token);
+            this.props.history.push('/movies');
         } else {
             return MESSAGE_ERROR;
         }
@@ -40,9 +40,7 @@ class SingIn extends Component {
             const response = await axios.post(URL_SIGN_IN, body);
             const { headers } = response;
             return { token: headers.token };
-        } catch (error) {
-            return error;
-        } finally {
+        }  finally {
             // helpers.removeButtonLoader(domElements.signInButton);
         }
     };
