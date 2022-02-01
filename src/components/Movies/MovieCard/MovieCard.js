@@ -1,4 +1,5 @@
 import './MovieCard.scss';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { URL_IMG } from '../../../constants/api';
 import { Link } from 'react-router-dom';
@@ -31,6 +32,14 @@ const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
             </div>
         </Link >
     );
+};
+
+MovieCard.propTypes = {
+    id: PropTypes.number.isRequired,
+    backdropPath: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    runtime: PropTypes.number.isRequired,
+    voteAverage: PropTypes.number.isRequired,
 };
 
 export default MovieCard;

@@ -1,12 +1,12 @@
 import React from 'react';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import PropTypes from 'prop-types';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const FilterDate = ({releaseDateFirst, releaseDateLast, setFilter}) => {
 
     const setMinDate = (date) => setFilter('release_date_first',date);
     const setMaxDate = (date) => setFilter('release_date_last',date);
-
 
     return (
         <div className="form-filters__release-date">
@@ -24,6 +24,12 @@ const FilterDate = ({releaseDateFirst, releaseDateLast, setFilter}) => {
             </div>
         </div>
     );
+};
+
+FilterDate.propTypes = {
+    releaseDateFirst: PropTypes.string.isRequired,
+    releaseDateLast : PropTypes.string.isRequired,
+    setFilter: PropTypes.func.isRequired
 };
 
 export default FilterDate;

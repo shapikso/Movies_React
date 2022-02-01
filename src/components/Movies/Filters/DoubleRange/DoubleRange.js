@@ -1,8 +1,9 @@
 import React from 'react';
-//import InputValue from "./InputValue";
-import Slider from "rc-slider";
 import "./slider.scss";
 import InputField from "../../../common/Input/InputField";
+import PropTypes from 'prop-types';
+import Slider from 'rc-slider';
+import './slider.scss';
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
@@ -28,6 +29,16 @@ const DoubleRange = ({title,minValue,maxValue, step, setRange, minInputValue, ma
             </div>
         </div>
     );
+};
+
+DoubleRange.propTypes = {
+    minValue: PropTypes.string.isRequired,
+    maxValue: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    step: PropTypes.string.isRequired,
+    maxInputValue: PropTypes.number.isRequired,
+    minInputValue: PropTypes.number.isRequired,
+    setRange : PropTypes.func.isRequired
 };
 
 export default DoubleRange;

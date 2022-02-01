@@ -1,7 +1,8 @@
 import React from 'react';
-import Select from "../Selector/Select";
-import {movieLanguages, movieStatus} from "../../../../constants/selectors";
-import Input from "../../../common/Input/InputField";
+import PropTypes from 'prop-types';
+import Select from '../Selector/Select';
+import {movieLanguages, movieStatus} from '../../../../constants/selectors';
+import Input from '../../../common/Input/InputField';
 
 const FilterHeaders = ({setFilter, title}) => {
     const setStatus = (status) => setFilter('status', status);
@@ -19,6 +20,11 @@ const FilterHeaders = ({setFilter, title}) => {
             <Select setDelector={setLanguage} options={movieLanguages}/>
         </div>
     );
+};
+
+FilterHeaders.propTypes = {
+    setFilter: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired
 };
 
 export default FilterHeaders;
