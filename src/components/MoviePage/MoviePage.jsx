@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import axios from "axios";
+import axios from 'axios';
 import './MoviePage.scss';
-import MovieDetails from "./MovieDetails/MovieDetails";
-import GenreDetails from "./GenreDetails/GenreDetails";
-import OverviewDetails from "./OverviewDetails/OverviewDetails";
-import Loader from "../common/Loader/Loader";
-import {MOVIE_BY_ID, URL_IMG} from "../../constants/api";
+import MovieDetails from './MovieDetails/MovieDetails';
+import GenreDetails from './GenreDetails/GenreDetails';
+import OverviewDetails from './OverviewDetails/OverviewDetails';
+import Loader from '../common/Loader/Loader';
+import {MOVIE_BY_ID, URL_IMG} from '../../constants/api';
 
 class MoviePage extends Component {
     constructor(props) {
@@ -45,24 +45,23 @@ class MoviePage extends Component {
             background: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${URL_IMG + this.state.film.backdrop_path})`,
             backgroundSize: 'cover'
         };
-        console.log(this.state.film.name);
         return (
-            <div>
+            <>
                 {this.state.isLoading
                     ? <Loader />
                     :
-                    <div>
-                        <div className="title">
+                    <div className='container movie-wrapper'>
+                        <div className='title'>
                             <span>{this.state.film.title}</span>
                         </div>
-                        <div className="movie-details" style={styles}>
+                        <div className='movie-details' style={styles}>
                             <MovieDetails film={this.state.film} hours={this.state.hours} minutes={this.state.minutes}/>
                             <GenreDetails genres={this.state.film.name}/>
                             <OverviewDetails overview={this.state.film.overview}/>
                         </div>
                     </div>
                 }
-            </div>
+            </>
         );
     }
 }
