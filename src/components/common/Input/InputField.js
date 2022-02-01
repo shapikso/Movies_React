@@ -1,28 +1,41 @@
 import React from 'react';
 import InputLabel from './Label';
+import Error from './Error';
 
-const InputField = ({className, label, type='text', name, value, placeholder, onChange }) => {
+const InputField = ({
+    className,
+    label,
+    type = 'text',
+    value,
+    placeholder,
+    onChange,
+    error,
+    onBlur,
+}) => {
     const handleChange = (e) => onChange(e.target.value);
+    const handleBlur = (e)=>onBlur(e.target.value);
 
     const inputClasses = ['basic-field'];
-    if (className) {
-        inputClasses.push(className);
-    }
+    if (className) inputClasses.push(className);
+    if(error) inputClasses.push('error');
 
     return (
-        <>
-            {label && <InputLabel htmlFor={name} lable={label}/>}
+        <div className="relative-wrapper">
+            {label && <InputLabel htmlFor={label} lable={label}/>}
             <input
                 type={type}
                 className={inputClasses.join(' ')}
-                name={name}
+                name={label}
                 value={value}
                 placeholder={placeholder}
                 autoComplete="off"
                 onChange={handleChange}
+                onBlur={handleBlur}
             />
-        </>
+            {error && <Error message={error}/>}
+        </div>
     );
 };
 
 export default InputField;
+
