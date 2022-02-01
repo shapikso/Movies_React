@@ -17,11 +17,9 @@ class SingIn extends Component {
 
     handlerSubmitForm = event => {
         event.preventDefault();
-        console.log("submit");
     };
 
     render() {
-        console.log(this.state);
         return (
             <Form onSubmit={this.handlerSubmitForm}>
                 <div className="fields">
