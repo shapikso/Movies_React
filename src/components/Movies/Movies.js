@@ -9,7 +9,6 @@ import Filters from './Filters/Filters';
 import { normalizeFilters } from '../../helpers/format';
 import { scrollToDownPage } from '../../helpers/scroll';
 import {FILTERS_INIT} from '../../constants/filters';
-import Loader from '../common/Loader/Loader';
 
 class Movies extends Component {
     constructor(props) {
@@ -59,9 +58,9 @@ class Movies extends Component {
         this.getMovies(page);
     };
 
-    submitResetFilters = () => {
+    submitResetFilters = (e) => {
         this.setState({ currentPage: 1, movies: [] });
-        this.loadMore(1);
+        this.loadMore(e,1);
     };
 
     render() {

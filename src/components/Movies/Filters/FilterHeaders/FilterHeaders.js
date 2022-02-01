@@ -5,6 +5,7 @@ import {movieLanguages, movieStatus} from '../../../../constants/selectors';
 import Input from '../../../common/Input/InputField';
 
 const FilterHeaders = ({setFilter, title}) => {
+
     const setStatus = (status) => setFilter('status', status);
     const setLanguage = (language) => setFilter('language', language);
     const setSearchTitle = (title) => setFilter('title', title);
@@ -16,8 +17,8 @@ const FilterHeaders = ({setFilter, title}) => {
                 onChange={setSearchTitle}
                 className="movie-title"
             />
-            <Select setDelector={setStatus} options={movieStatus}/>
-            <Select setDelector={setLanguage} options={movieLanguages}/>
+            <Select setSelector={setStatus} options={movieStatus}/>
+            <Select setSelector={setLanguage} options={movieLanguages}/>
         </div>
     );
 };

@@ -43,8 +43,6 @@ class SingIn extends Component {
             const {headers} = await axios.post(URL_SIGN_IN, body);
             localStorage.setItem('token', headers.token);
             this.props.history.push('/movies');
-        } catch (error){
-            console.log(error);
         } finally {
             // helpers.removeButtonLoader(domElements.signInButton);
         }
