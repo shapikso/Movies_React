@@ -48,7 +48,7 @@ class MoviePage extends Component {
         return (
             <>
                 {this.state.isLoading
-                    ? <Loader/>
+                    ? <Loader />
                     :
                     <div className='container movie-wrapper'>
                         <div className='title'>

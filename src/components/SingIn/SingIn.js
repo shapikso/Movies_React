@@ -46,7 +46,6 @@ class SingIn extends Component {
     };
 
     render() {
-        console.log(this.state);
         return (
             <div className="container main__container">
                 <div className="form-wrapper">
