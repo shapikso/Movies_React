@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from "../../../common/Button/Button";
+import PropTypes from 'prop-types';
+import Button from '../../../common/Button/Button';
 
 const FiltersButtons = ({formSubmitHandler, formResetHandler, closeModal}) =>
     (
@@ -10,5 +11,10 @@ const FiltersButtons = ({formSubmitHandler, formResetHandler, closeModal}) =>
         </div>
     );
 
+FiltersButtons.propTypes = {
+    formSubmitHandler: PropTypes.func.isRequired,
+    formResetHandler : PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+};
 
 export default FiltersButtons;

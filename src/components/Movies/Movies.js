@@ -6,8 +6,8 @@ import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
 import Loader from '../common/Loader/Loader';
-import Filters from "./Filters/Filters";
-import {normalizeFilters} from "../../helpers/format";
+import Filters from './Filters/Filters';
+import {normalizeFilters} from '../../helpers/format';
 
 
 class Movies extends Component {
@@ -28,7 +28,6 @@ class Movies extends Component {
                 revenue_min: 0,
                 revenue_max: 30000,
             },
-            isFiltersSet: false,
             currentPage: 1,
             isFiltersHidden : true,
             isLoading: true,

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './filters.css';
-import FilterHeaders from "./FilterHeaders/FilterHeaders";
-import FiltersRanges from "./FiltersRanges/FiltersRanges";
-import FilterDate from "./FilterDate/FilterDate";
-import FiltersButtons from "./FiltersButtons/FiltersButtons";
+import FilterHeaders from './FilterHeaders/FilterHeaders';
+import FiltersRanges from './FiltersRanges/FiltersRanges';
+import FilterDate from './FilterDate/FilterDate';
+import FiltersButtons from './FiltersButtons/FiltersButtons';
 
 class Filters extends Component {
     constructor(props) {
@@ -54,4 +55,13 @@ render() {
 }
 }
 
+Filters.propTypes = {
+    closeModal: PropTypes.func.isRequired,
+    onSubmite : PropTypes.func.isRequired,
+    filters: PropTypes.object.isRequired,
+    setFilter: PropTypes.func.isRequired,
+    clearFilters: PropTypes.func.isRequired,
+};
+
 export default Filters;
+
