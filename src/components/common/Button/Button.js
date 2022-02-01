@@ -2,26 +2,14 @@ import './Button.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
-const Button = ({
-    type = 'button',
-    isDisabled = false,
-    className,
-    onClick,
-    contentKey,
-}) => {
+const Button = ({ type = 'button', isDisabled = false, className, onClick, contentKey }) => {
     const btnClasses = ['button'];
     if (className) {
         btnClasses.push(className);
     }
-    const handleClick = () => onClick();
+    const handleClick = () => onClick(event);
     return (
-        <button
-            className={btnClasses.join(' ')}
-            type={type}
-            onClick={handleClick}
-            disabled={isDisabled}
-        >
+        <button className={btnClasses.join(' ')} type={type} onClick={handleClick} disabled={isDisabled}>
             {contentKey}
         </button>
     );

@@ -1,8 +1,9 @@
 import React from 'react';
+import '../input/Form.scss';
 
 const Form = ({ onSubmit, children }) => (
-    <div className="form-wrapper">
-        <form onSubmit={onSubmit}> 
+    <div>
+        <form onSubmit={onSubmit} className="form frosted-glass-effect">
             {children}
         </form>
     </div>

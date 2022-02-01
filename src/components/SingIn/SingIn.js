@@ -1,52 +1,78 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import Form from '../common/input/Form';
 import Input from '../common/input/InputField';
+import { URL_SIGN_IN, MESSAGE_ERROR } from '../../constants/api';
+import Button from '../common/Button/Button';
+import '../SingIn/SingIn.scss';
 
 class SingIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
             user: '',
-            password: ''
+            password: '',
         };
     }
 
-    handleChangeUser = (value) => this.setState({ user: value });
+    handleChangeUser = value => this.setState({ user: value });
 
-    handleChangePassword = (value) => this.setState({ password: value});
+    handleChangePassword = value => this.setState({ password: value });
 
-    handlerSubmitForm = event => {
+    handleSubmitFormSignIn = event => {
+        console.log(event);
         event.preventDefault();
-        console.log("submit");
+        const responseSignIn = this.postSignIn();
+        if (responseSignIn.token) {
+            localStorage.setItem(Date.now(), JSON.stringify(responseSignIn));
+            setTimeout(() => {
+                return <Redirect to="/movies" />;
+            }, 250);
+        } else {
+            return MESSAGE_ERROR;
+        }
+    };
+
+    postSignIn = async () => {
+        try {
+            // helpers.setButtonLoader(domElements.signInButton);
+            //возможно валидация
+            const body = { login: this.state.user, password: this.state.password };
+            const response = await axios.post(URL_SIGN_IN, body);
+            const { headers } = response;
+            return { token: headers.token };
+        } catch (error) {
+            return error;
+        } finally {
+            // helpers.removeButtonLoader(domElements.signInButton);
+        }
     };
 
     render() {
         console.log(this.state);
         return (
-            <Form onSubmit={this.handlerSubmitForm}>
-                <div className="fields">
-                    <div className="input-wrapper">
-                        <Input
-                            onChange={this.handleChangeUser}
-                            label={"Login"}
-                            type={'text'}
-                            name={'login'}
-                            value={this.state.user}
-                            placeholder={'Enter your login'}
-                            autocomplete="off"
-                        />
-                        <Input
-                            label={"Password"}
-                            type={'password'}
-                            name={'password'}
-                            value={this.state.password}
-                            placeholder={'Enter your password'}
-                            autocomplete="off"
-                            onChange={this.handleChangePassword}
-                        />
-                    </div>
+            <div className="container main__container">
+                <div className="form-wrapper">
+                    <Form onSubmit={this.handleSubmitFormSignIn}>
+                        <div className="fields">
+                            <div className="input-wrapper">
+                                <Input label={'Login'} type={'text'} name={'login'} value={this.state.user} placeholder={'Enter your login'} autocomplete="off" onChange={this.handleChangeUser} />
+                                <Input
+                                    label={'Password'}
+                                    type={'password'}
+                                    name={'password'}
+                                    value={this.state.password}
+                                    placeholder={'Enter your password'}
+                                    autocomplete="off"
+                                    onChange={this.handleChangePassword}
+                                />
+                                <Button type={'button'} isDisabled={false} className={''} onClick={this.handleSubmitFormSignIn} contentKey={'SUBMIT'} />
+                            </div>
+                        </div>
+                    </Form>
                 </div>
-            </Form>
+            </div>
         );
     }
 }
