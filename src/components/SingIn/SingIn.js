@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import {withRouter} from "react-router";
 import axios from 'axios';
 import Form from '../common/input/Form';
 import Input from '../common/input/InputField';
@@ -26,9 +26,7 @@ class SingIn extends Component {
         const responseSignIn = this.postSignIn();
         if (responseSignIn.token) {
             localStorage.setItem(Date.now(), JSON.stringify(responseSignIn));
-            setTimeout(() => {
-                return <Redirect to="/movies" />;
-            }, 250);
+            setTimeout(() => this.props.history.push('/movies'), 250);
         } else {
             return MESSAGE_ERROR;
         }
@@ -57,7 +55,14 @@ class SingIn extends Component {
                     <Form onSubmit={this.handleSubmitFormSignIn}>
                         <div className="fields">
                             <div className="input-wrapper">
-                                <Input label={'Login'} type={'text'} name={'login'} value={this.state.user} placeholder={'Enter your login'} autocomplete="off" onChange={this.handleChangeUser} />
+                                <Input 
+                                    label={'Login'} 
+                                    type={'text'} 
+                                    name={'login'} 
+                                    value={this.state.user} 
+                                    placeholder={'Enter your login'} 
+                                    autocomplete="off" 
+                                    onChange={this.handleChangeUser} />
                                 <Input
                                     label={'Password'}
                                     type={'password'}
@@ -67,7 +72,12 @@ class SingIn extends Component {
                                     autocomplete="off"
                                     onChange={this.handleChangePassword}
                                 />
-                                <Button type={'button'} isDisabled={false} className={''} onClick={this.handleSubmitFormSignIn} contentKey={'SUBMIT'} />
+                                <Button 
+                                    type={'button'} 
+                                    isDisabled={false} 
+                                    className={''} 
+                                    onClick={this.handleSubmitFormSignIn} 
+                                    contentKey={'SUBMIT'} />
                             </div>
                         </div>
                     </Form>
@@ -77,4 +87,4 @@ class SingIn extends Component {
     }
 }
 
-export default SingIn;
+export default withRouter(SingIn);
