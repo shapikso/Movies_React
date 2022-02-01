@@ -1,6 +1,7 @@
 import './Button.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import Loader from "../Loader/Loader";
 
 const Button = ({
     type = 'button',
@@ -9,7 +10,6 @@ const Button = ({
     className,
     onClick,
     contentKey,
-    loader,
 }) => {
     const btnClasses = ['button'];
     if (className) {
@@ -23,7 +23,7 @@ const Button = ({
             onClick={handleClick}
             disabled={isDisabled || isLoading}
         >
-            {isLoading ? loader : contentKey}
+            {isLoading ? <Loader className={'loader-btn'} /> : contentKey}
         </button>
     );
 };
@@ -34,8 +34,7 @@ Button.propTypes = {
     isDisabled: PropTypes.bool,
     isLoading: PropTypes.bool,
     onClick: PropTypes.func,
-    contentKey: PropTypes.oneOfType([PropTypes.string, PropTypes.obj]),
-    loader: PropTypes.element.isRequired
+    contentKey: PropTypes.string,
 };
 
 export default Button;

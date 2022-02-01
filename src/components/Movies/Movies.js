@@ -5,7 +5,6 @@ import axios from 'axios';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
-import Loader from '../common/Loader/Loader';
 import Filters from './Filters/Filters';
 import { normalizeFilters } from '../../helpers/format';
 import { scrollToDownPage } from '../../helpers/scroll';
@@ -86,8 +85,7 @@ class Movies extends Component {
                     <Button
                         className="button"
                         isLoading={this.state.isLoading}
-                        contentKey= "Load more"
-                        loader={<Loader className="loader-btn" />}
+                        contentKey="Load more"
                         onClick={this.loadMore}
                     />
                 </div>
