@@ -9,25 +9,14 @@ import Loader from '../common/Loader/Loader';
 import Filters from './Filters/Filters';
 import { normalizeFilters } from '../../helpers/format';
 import { scrollToDownPage } from '../../helpers/scroll';
+import {FILTERS_INIT} from '../../constants/filters';
 
 class Movies extends Component {
     constructor(props) {
         super(props);
         this.state = {
             movies: [],
-            filters: {
-                title: '',
-                language: '',
-                status: '',
-                release_date_first: '',
-                release_date_last: '',
-                budget_min: 0,
-                budget_max: 500000000,
-                popularity_min: 0,
-                popularity_max: 200,
-                revenue_min: 0,
-                revenue_max: 30000,
-            },
+            filters: FILTERS_INIT,
             isFiltersSet: false,
             currentPage: 1,
             isFiltersHidden: true,
@@ -44,19 +33,7 @@ class Movies extends Component {
     toggleFilters = () => this.setState({ isFiltersHidden: !this.state.isFiltersHidden });
     clearFilters = () =>
         this.setState({
-            filters: {
-                title: '',
-                language: '',
-                status: '',
-                release_date_first: '',
-                release_date_last: '',
-                budget_min: 0,
-                budget_max: 500000000,
-                popularity_min: 0,
-                popularity_max: 200,
-                revenue_min: 0,
-                revenue_max: 30000,
-            },
+            filters: FILTERS_INIT,
         });
 
     getMovies = async (page) => {
@@ -108,7 +85,9 @@ class Movies extends Component {
                 <div className="center">
                     <Button
                         className="button"
-                        contentKey={this.state.isLoading ? <Loader className={'loader-btn'} /> : 'Load more'}
+                        isLoading={this.state.isLoading}
+                        contentKey= "Load more"
+                        loader={<Loader className="loader-btn" />}
                         onClick={this.loadMore}
                     />
                 </div>

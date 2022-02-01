@@ -1,10 +1,10 @@
 import './MovieCard.scss';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { URL_IMG } from '../../../constants/api';
 import { Link } from 'react-router-dom';
 import { formatRuntime, formatRate, getRateState } from '../../../helpers/format';
 import MoviePage from "../../MoviePage/MoviePage";
-import PropTypes from 'prop-types';
 
 const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const runtimeFormated = formatRuntime(runtime);

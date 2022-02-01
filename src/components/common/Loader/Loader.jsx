@@ -1,7 +1,7 @@
 import React from 'react';
 import './Loader.scss';
 
-const Loader = ({ className }) => {
+const Loader = ({ className='loader-full-screen' }) => {
     return (
         <div className={className}>
             <div className="lds-ellipsis">
