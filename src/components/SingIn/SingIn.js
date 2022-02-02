@@ -52,23 +52,23 @@ class SingIn extends Component {
             <div className="form-wrapper">
                 <Form onSubmit={this.handleSubmitFormSignIn}>
                     <Input
-                        label={'Login'}
+                        label="Login"
                         value={this.state.user}
-                        placeholder={'Enter your login'}
+                        placeholder="Enter your login"
                         onChange={this.handleChangeUser}
                         onBlur={this.handleChangeLoginInput}
                         error={this.state.error.user}
                     />
                     <Input
-                        label={'Password'}
-                        type={'password'}
+                        label="Password"
+                        type="password"
                         value={this.state.password}
-                        placeholder={'Enter your password'}
+                        placeholder="Enter your password"
                         onChange={this.handleChangePassword}
                         onBlur={this.handleChangePasswordInput}
                         error={this.state.error.password}
                     />
-                    <Button type="submit" contentKey={'SUBMIT'} isLoading={this.state.isLoading} />
+                    <Button type="submit" contentKey="SUBMIT" isLoading={this.state.isLoading} />
                 </Form>
             </div>
         );

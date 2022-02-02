@@ -27,14 +27,9 @@ class SingUp extends Component {
     }
 
     handleChangeFirstName = value => this.setState({ firstName: value });
-
     handleChangeLastName = value => this.setState({ lastName: value });
-
     handleChangeLogin = value => this.setState({ userName: value });
-
     handleChangePassword = value => this.setState({ password: value });
-
-    // setFilter = (key,value) => this.setState({filters : {...this.state.filters,[key]: value}});
 
     handleChangeFirstNameInput = () => {
         const error = isValidName(this.state.firstName);
@@ -78,39 +73,39 @@ class SingUp extends Component {
             <div className="form-wrapper">
                 <Form onSubmit={this.handleSubmitFormSignUp}>
                     <Input
-                        label={'First Name'}
+                        label="First Name"
                         value={this.state.firstName}
-                        placeholder={'Enter your first name'}
+                        placeholder="Enter your first name"
                         onChange={this.handleChangeFirstName}
                         onBlur={this.handleChangeFirstNameInput}
                         error={this.state.error.firstName}
                     />
                     <Input
-                        label={'Last Name'}
+                        label="Last Name"
                         value={this.state.lastName}
-                        placeholder={'Enter your last name'}
+                        placeholder="Enter your last name"
                         onChange={this.handleChangeLastName}
                         onBlur={this.handleChangeLastNameInput}
                         error={this.state.error.lastName}
                     />
                     <Input
-                        label={'Login'}
+                        label="Login"
                         value={this.state.userName}
-                        placeholder={'Enter your login'}
+                        placeholder="Enter your login"
                         onChange={this.handleChangeLogin}
                         onBlur={this.handleChangeLoginInput}
                         error={this.state.error.userName}
                     />
                     <Input
-                        label={'Password'}
-                        type={'password'}
+                        label="Password"
+                        type="password"
                         value={this.state.password}
-                        placeholder={'Enter your password'}
+                        placeholder="Enter your password"
                         onChange={this.handleChangePassword}
                         onBlur={this.handleChangePasswordInput}
                         error={this.state.error.password}
                     />
-                    <Button type="submit" contentKey={'SUBMIT'} isLoading={this.state.isLoading} />
+                    <Button type="submit" contentKey="SUBMIT" isLoading={this.state.isLoading} />
                 </Form>
             </div>
         );
