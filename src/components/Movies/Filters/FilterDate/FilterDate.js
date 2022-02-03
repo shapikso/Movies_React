@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import {StFilterRow} from "../styled";
+import {StDate} from "../DoubleRange/styled";
 
 const FilterDate = ({releaseDateFirst, releaseDateLast, setFilter}) => {
 
@@ -9,20 +11,20 @@ const FilterDate = ({releaseDateFirst, releaseDateLast, setFilter}) => {
     const setMaxDate = (date) => setFilter('release_date_last',date);
 
     return (
-        <div className="form-filters__release-date">
-            <div className="form-filters__release-date__item date-picker">
+        <StFilterRow>
+            <StDate>
                 <DatePicker selected={releaseDateFirst}
                     onChange={setMinDate}
                     placeholderText="Select Date.."
                     className="basic-field date-picker__input"/>
-            </div>
-            <div className="form-filters__release-date__item date-picker">
+            </StDate>
+            <StDate>
                 <DatePicker selected={releaseDateLast}
                     onChange={setMaxDate}
                     placeholderText="Select Date.."
                     className="basic-field date-picker__input"/>
-            </div>
-        </div>
+            </StDate>
+        </StFilterRow>
     );
 };
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import "./slider.scss";
 import InputField from "../../../common/Input/InputField";
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
 import './slider.scss';
+import {StDoubleRange, StDoubleRangeInfo, StDoubleRangePlace, StDoubleRangeTittle} from "./styled";
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 
@@ -12,13 +12,13 @@ const DoubleRange = ({title,minValue,maxValue, step, setRange, minInputValue, ma
     const onChangeRangeHandler = ([key,value]) => setRange(key,value);
 
     return (
-        <div className="form-filters__ranges__item double-range">
-            <div className="double-range__title">{title}</div>
-            <div className="double-range__info">
+        <StDoubleRange>
+            <StDoubleRangeTittle>{title}</StDoubleRangeTittle>
+            <StDoubleRangeInfo>
                 <InputField className="double-range__info-min" readOnly={true} value={minInputValue} />
                 <InputField className="double-range__info-min" readOnly={true} value={maxInputValue} />
-            </div>
-            <div className="double-range__place">
+            </StDoubleRangeInfo>
+            <StDoubleRangePlace>
                 <Range
                     min={+minValue}
                     max={+maxValue}
@@ -26,8 +26,8 @@ const DoubleRange = ({title,minValue,maxValue, step, setRange, minInputValue, ma
                     defaultValue={[+minValue, +maxValue]}
                     onChange={onChangeRangeHandler}
                 />
-            </div>
-        </div>
+            </StDoubleRangePlace>
+        </StDoubleRange>
     );
 };
 

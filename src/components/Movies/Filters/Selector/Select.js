@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SelectItem from './SelectItem';
+import {StSelect} from "../DoubleRange/styled";
 
 const Select = ({options,setSelector}) => {
     const onChangeHandler = (e)=> setSelector(e.target.value);
     return (
-        <select onChange={onChangeHandler} name="movie-status" className="basic-field">
+        <StSelect onChange={onChangeHandler}>
             {options.map((el, index) => <SelectItem key={index} value={el[0]} title={el[1]} />)}
-        </select>
+        </StSelect>
     );
 };
 
