@@ -1,6 +1,8 @@
 import React from 'react';
 import InputLabel from './Label';
 import Error from './Error';
+import {StInput,
+    StWrapper} from "./styled";
 
 const InputField = ({
     className,
@@ -21,9 +23,9 @@ const InputField = ({
     if(error) inputClasses.push('error');
 
     return (
-        <div className="relative-wrapper">
+        <StWrapper>
             {label && <InputLabel htmlFor={label} lable={label}/>}
-            <input
+            <StInput
                 type={type}
                 className={inputClasses.join(' ')}
                 name={label}
@@ -33,9 +35,10 @@ const InputField = ({
                 autoComplete="off"
                 onChange={handleChange}
                 onBlur={handleBlur}
+                error={error}
             />
             {error && <Error message={error}/>}
-        </div>
+        </StWrapper>
     );
 };
 

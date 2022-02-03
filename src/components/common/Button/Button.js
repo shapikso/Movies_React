@@ -1,16 +1,12 @@
-import './Button.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {StButton} from "./styled";
 
-const Button = ({ type = 'button', isDisabled = false, className, onClick, contentKey }) => {
-    const btnClasses = ['button'];
-    if (className) {
-        btnClasses.push(className);
-    }
+const Button = ({ type = 'button', isDisabled = false, onClick, contentKey }) => {
     return (
-        <button className={btnClasses.join(' ')} type={type} onClick={onClick} disabled={isDisabled}>
+        <StButton type={type} onClick={onClick} disabled={isDisabled}>
             {contentKey}
-        </button>
+        </StButton>
     );
 };
 

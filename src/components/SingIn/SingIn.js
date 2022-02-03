@@ -3,24 +3,11 @@ import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 import Form from '../common/Input/Form';
 import Input from '../common/Input/InputField';
-import {URL_SIGN_IN} from '../../constants/api';
 import Button from '../common/Button/Button';
+import {URL_SIGN_IN} from '../../constants/api';
 import '../SingIn/SingIn.scss';
 import {isValidLogin, isValidPassword} from '../../helpers/validation';
-
-// class SingIn extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             redirect: false,
-//             user: '',
-//             password: '',
-//             error: {
-//                 user: '',
-//                 password: '',
-//             },
-//         };
-//     }
+import {StWrapper} from "./styled";
 
 const SingIn = () => {
     const navigate = useNavigate();
@@ -63,7 +50,7 @@ const SingIn = () => {
     };
 
     return (
-        <div className="form-wrapper">
+        <StWrapper>
             <Form onSubmit={handleSubmitFormSignIn}>
                 <Input
                     label="Login"
@@ -82,9 +69,9 @@ const SingIn = () => {
                     onBlur={handleChangePasswordInput}
                     error={state.error.password}
                 />
-                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading}/>
+                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
             </Form>
-        </div>
+        </StWrapper>
     );
 };
 
