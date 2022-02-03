@@ -1,17 +1,17 @@
 import React from 'react';
-import '../MoviePage.scss';
-import {ADULT_FALSE, ADULT_TRUE} from '../../../constants/formatMovie';
 import PropTypes from 'prop-types';
+import {ADULT_FALSE, ADULT_TRUE} from '../../../constants/formatMovie';
+import {StyledGapsUl, StyledInfoLi} from './styled';
 
 const MovieDetails = ({film, hours, minutes}) => (
-    <ul className='base-gaps'>
-        <li className='small-info info-block-size'>adult: {film.adult
+    <StyledGapsUl>
+        <StyledInfoLi>adult: {film.adult
             ? ADULT_TRUE
             : ADULT_FALSE
-        }</li>
-        <li className='small-info info-block-size'>{hours}h {minutes}m</li>
-        <li className='small-info info-block-size'>movie rate: {film.vote_average}</li>
-    </ul>
+        }</StyledInfoLi>
+        <StyledInfoLi>{hours}h {minutes}m</StyledInfoLi>
+        <StyledInfoLi>movie rate: {film.vote_average}</StyledInfoLi>
+    </StyledGapsUl>
 );
 
 MovieDetails.propTypes = {
