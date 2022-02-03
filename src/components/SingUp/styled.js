@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StDiv = styled.div `
+export const StFormSignUp = styled.div `
   display: flex;
   justify-content: center;
   position: relative;

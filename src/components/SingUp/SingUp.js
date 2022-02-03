@@ -8,7 +8,7 @@ import { URL_SIGN_UP } from '../../constants/api';
 import { isValidLogin, isValidName, isValidPassword } from '../../helpers/validation';
 import { normalizeFilters } from '../../helpers/format';
 import {useState} from 'react';
-import {StDiv} from './styled';
+import {StFormSignUp} from './styled';
 
 const SingUp  = () => {
 
@@ -73,7 +73,7 @@ const SingUp  = () => {
         return <Navigate to={'/'} />;
     }
     return (
-        <StDiv>
+        <StFormSignUp>
             <Form onSubmit={handleSubmitFormSignUp}>
                 <Input
                     label="First Name"
@@ -110,7 +110,7 @@ const SingUp  = () => {
                 />
                 <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
             </Form>
-        </StDiv>
+        </StFormSignUp>
     );
 
 };
