@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import { Navigate } from "react-router-dom";
 import axios from 'axios';
 import Form from '../common/Input/Form';
 import Input from '../common/Input/InputField';
@@ -12,6 +12,7 @@ class SingIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            redirect: false,
             user: '',
             password: '',
             error: {
@@ -20,6 +21,8 @@ class SingIn extends Component {
             },
         };
     }
+
+
 
     handleChangeUser = value => this.setState({ user: value });
 
@@ -41,13 +44,16 @@ class SingIn extends Component {
             const body = { login: this.state.user, password: this.state.password };
             const { headers } = await axios.post(URL_SIGN_IN, body);
             localStorage.setItem('token', headers.token);
-            this.props.history.push('/movies');
+            this.setState({redirect:true});
         } finally {
             this.setState({ isLoading: false });
         }
     };
 
     render() {
+        if (this.state.redirect) {
+            return <Navigate to={'/movies'} />;
+        }
         return (
             <div className="form-wrapper">
                 <Form onSubmit={this.handleSubmitFormSignIn}>
@@ -75,4 +81,5 @@ class SingIn extends Component {
     }
 }
 
-export default withRouter(SingIn);
+export default SingIn;
+

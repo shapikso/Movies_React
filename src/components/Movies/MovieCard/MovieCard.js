@@ -11,7 +11,7 @@ const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const formatedRate = formatRate(voteAverage);
     const typeRate = getRateState(voteAverage);
     return (
-        <Link to={`movie/${id}`} element={<MoviePage props={id}/>}>
+        <Link to={`/movies/${id}`} element={<MoviePage id={id}/>}>
             <div className="movie-card card">
                 <div className="card-wrapper">
                     <div className="film-poster">

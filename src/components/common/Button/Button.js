@@ -7,9 +7,8 @@ const Button = ({ type = 'button', isDisabled = false, className, onClick, conte
     if (className) {
         btnClasses.push(className);
     }
-    const handleClick = () => onClick(event);
     return (
-        <button className={btnClasses.join(' ')} type={type} onClick={handleClick} disabled={isDisabled}>
+        <button className={btnClasses.join(' ')} type={type} onClick={onClick} disabled={isDisabled}>
             {contentKey}
         </button>
     );

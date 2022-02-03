@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import axios from 'axios';
+import { Navigate } from "react-router-dom";
 import Form from '../common/Input/Form';
 import Input from '../common/Input/InputField';
 import Button from '../common/Button/Button';
@@ -12,6 +12,7 @@ class SingUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            redirect: false,
             firstName: '',
             lastName: '',
             userName: '',
@@ -61,7 +62,7 @@ class SingUp extends Component {
             };
             const response = await axios.post(URL_SIGN_UP, body);
             const { headers } = response;
-            this.props.history.push('/');
+            this.setState({redirect:true});
             return { status: headers.status };
         } finally {
             this.setState({ isLoading: false });
@@ -69,6 +70,9 @@ class SingUp extends Component {
     };
 
     render() {
+        if (this.state.redirect) {
+            return <Navigate to={'/'} />;
+        }
         return (
             <div className="form-wrapper">
                 <Form onSubmit={this.handleSubmitFormSignUp}>
@@ -112,4 +116,4 @@ class SingUp extends Component {
     }
 }
 
-export default withRouter(SingUp);
+export default SingUp;
