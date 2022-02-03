@@ -1,69 +1,55 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import './MoviePage.scss';
+import {useParams} from 'react-router-dom';
+import {StyledMovieDetails, StyledTitle, StyledWrapper} from './styled';
 import MovieDetails from './MovieDetails/MovieDetails';
 import GenreDetails from './GenreDetails/GenreDetails';
 import OverviewDetails from './OverviewDetails/OverviewDetails';
 import Loader from '../common/Loader/Loader';
-import {MOVIE_BY_ID, URL_IMG} from '../../constants/api';
+import {MOVIE_BY_ID} from '../../constants/api';
+import {formatTime} from '../../helpers/format';
 
-class MoviePage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            film: [],
-            genres: [],
-            hours: 0,
-            minutes: 0,
-            isLoading: true,
-        };
-    }
+const MoviePage = () => {
 
-    componentDidMount() {
-        this.getMovieFromApi();
-    }
+    const {id} = useParams();
 
-    getMovieFromApi = async () => {
+    const [state, setState] = useState({
+        film: [],
+        genres: [],
+        hours: 0,
+        minutes: 0,
+        isLoading: true,
+    });
+
+    useEffect(() => {getMovieFromApi();}, []);
+
+    const getMovieFromApi = async () => {
         try {
-            const res = await axios.get(`${MOVIE_BY_ID}${this.props.match.params.id}`);
-            this.setState({film: res.data});
-            this.formatRuntime();
-        }finally {
-            this.setState({isLoading: false});
+            const {data} = await axios.get(`${MOVIE_BY_ID}${id}`);
+            const dates = formatTime(data.runtime);
+            setState((prevState) => ({...prevState, film: data, ...dates}));
+        } finally {
+            setState((prevState) => ({...prevState, isLoading: false}));
         }
-    }
-
-    formatRuntime = () => {
-        const hours = Math.floor(this.state.film.runtime / 60);
-        const minutes = this.state.film.runtime % 60;
-        this.setState({hours: hours, minutes: minutes});
-    }
-
-
-    render() {
-        const styles = {
-            background: `linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url(${URL_IMG + this.state.film.backdrop_path})`,
-            backgroundSize: 'cover'
-        };
-        return (
-            <>
-                {this.state.isLoading
-                    ? <Loader />
-                    :
-                    <div className='container movie-wrapper'>
-                        <div className='title'>
-                            <span>{this.state.film.title}</span>
-                        </div>
-                        <div className='movie-details' style={styles}>
-                            <MovieDetails film={this.state.film} hours={this.state.hours} minutes={this.state.minutes}/>
-                            <GenreDetails genres={this.state.film.name}/>
-                            <OverviewDetails overview={this.state.film.overview}/>
-                        </div>
-                    </div>
-                }
-            </>
-        );
-    }
-}
+    };
+    return (
+        <>
+            {state.isLoading
+                ? <Loader/>
+                :
+                <StyledWrapper>
+                    <StyledTitle>
+                        <span>{state.film.title}</span>
+                    </StyledTitle>
+                    <StyledMovieDetails path={state.film.backdrop_path}>
+                        <MovieDetails film={state.film} hours={state.hours} minutes={state.minutes}/>
+                        <GenreDetails genres={state.film.name}/>
+                        <OverviewDetails overview={state.film.overview}/>
+                    </StyledMovieDetails>
+                </StyledWrapper>
+            }
+        </>
+    );
+};
 
 export default MoviePage;

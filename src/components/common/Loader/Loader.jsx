@@ -1,14 +1,12 @@
 import React from 'react';
-// import './Loader.scss';
+import {StyledMainDiv, StyledSecondDiv} from './styled';
 
-const Loader = ({ className='loader-full-screen' }) => {
-    return (
-        <div className={className}>
-            <div className="lds-ellipsis">
-                {new Array(4).fill(null).map((_,index) => <div key={index}/>)}
-            </div>
-        </div>
-    );
-};
+const Loader = () => (
+    <StyledMainDiv>
+        <StyledSecondDiv>
+            {new Array(4).fill(null).map((_, index) => <div key={index}/>)}
+        </StyledSecondDiv>
+    </StyledMainDiv>
+);
 
 export default Loader;
