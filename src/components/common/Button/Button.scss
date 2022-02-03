@@ -1,4 +1,4 @@
-@import "../styles/colors.scss";
+//@import "../styles/colors.js";
 
 .button {
     min-width: 300px;
@@ -8,24 +8,24 @@
     line-height: 1;
     text-transform: capitalize;
     letter-spacing: 0.1em;
-    color: $light-primary-color;
+    //color: $light-primary-color;
     border-radius: 5px;
-    background-color: $primary-color;
+    //background-color: $primary-color;
     transition: all 0.2s ease;
     position: relative;
 
     &:hover {
-        background-color: $primary-color-opacity;
+        //background-color: $primary-color-opacity;
     }
 
     &:active {
-        background-color: $light-primary-color;
-        color: $dark-primary-color;
+        //background-color: $light-primary-color;
+        //color: $dark-primary-color;
     }
 
     &[disabled] {
-        background-color: $primary-color-disabled;
-        color: $light-primary-color-opacity;
+        //background-color: $primary-color-disabled;
+        //color: $light-primary-color-opacity;
         cursor: not-allowed;
     }
 
@@ -42,23 +42,23 @@
         &--link {
             min-width: 100px;
             height: 40px;
-            color: $light-primary-color;
+            //color: $light-primary-color;
             letter-spacing: 0.1em;
-            border: 1px solid $light-primary-color;
+            //border: 1px solid $light-primary-color;
             border-radius: 5px;
             padding: 5px;
             transition: all 0.25s ease;
-            background-color: transparent;
+            //background-color: transparent;
             text-decoration: none;
 
             &:hover {
-                background-color: $light-primary-color;
-                color: $dark-primary-color;
+                //background-color: $light-primary-color;
+                //color: $dark-primary-color;
             }
 
             &:active {
-                background-color: $light-primary-color-opacity;
-                border-color: transparent;
+                //background-color: $light-primary-color-opacity;
+                //border-color: transparent;
             }
         }
 }

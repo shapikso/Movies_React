@@ -1,5 +1,5 @@
 import React from 'react';
-import './Loader.scss';
+// import './Loader.scss';
 
 const Loader = ({ className='loader-full-screen' }) => {
     return (
