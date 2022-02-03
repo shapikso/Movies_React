@@ -1,16 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {StyledGapsDiv, StyledGenresDiv, StyledMovieHeaderSpan} from './styled';
 
 const GenreDetails = ({genres}) => (
-    <div>
-        <span className='movie-header'>Genres</span>
-        <div className='base-gaps'>
+    <>
+        <StyledMovieHeaderSpan>Genres</StyledMovieHeaderSpan>
+        <StyledGapsDiv>
             {genres.map((el) =>
-                <div key={el} className='genres-info info-block-size'>
+                <StyledGenresDiv key={el} >
                     {el}
-                </div>)}
-        </div>
-    </div>
+                </StyledGenresDiv>)}
+        </StyledGapsDiv>
+    </>
 );
 
 GenreDetails.propTypes = {
