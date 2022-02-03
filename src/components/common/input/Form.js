@@ -1,12 +1,15 @@
 import React from 'react';
 import '../Input/Form.scss';
+import {StForm} from './styled.js';
+import {StFormContainer} from "../Input/styled";
 
 const Form = ({ onSubmit, children }) => (
-    <div>
-        <form onSubmit={onSubmit} className="form frosted-glass-effect">
+    <StFormContainer>
+        <p>fadsf</p>
+        <StForm onSubmit={onSubmit}>
             {children}
-        </form>
-    </div>
+        </StForm>
+    </StFormContainer>
 );
 
 export default Form;
