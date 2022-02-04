@@ -9,13 +9,13 @@ export const StWrapper= styled.div`
 
 export const StInput = styled.input`
   margin: 25px 0 25px;
-  width: ${({inpWidth}) => inpWidth ? inpWidth : '300px' };;
+  width: 100%;
   background: transparent;
   padding: 10px 25px;
   background: none;
   border: 1px solid ${COLORS.lightPrimaryColor};
   border-radius: 5px;
-  height: 50px;
+  height: 40px;
   font-size: 16px;
   color: ${COLORS.lightPrimaryColor};
  & [error] {

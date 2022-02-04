@@ -69,7 +69,7 @@ const SingIn = () => {
                     onBlur={handleChangePasswordInput}
                     error={state.error.password}
                 />
-                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
+                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} width={'300px'}/>
             </Form>
         </StFormSignIn>
     );

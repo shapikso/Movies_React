@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import {COLORS} from '../styles/colors';
 
 export const StButton = styled.button`
-  min-width: ${({btnWidth}) => btnWidth ? btnWidth : '300px' };
-  height: 50px;
+  min-width: ${({width}) => `${width || '100px'}`};
+  height: 40px;
   padding: 10px 20px;
   font-size: 16px;
   line-height: 1;
@@ -11,9 +11,10 @@ export const StButton = styled.button`
   letter-spacing: 0.1em;
   color: ${COLORS.lightPrimaryColor};
   border-radius: 5px;
-  background-color: ${COLORS.primaryColor};
+  background-color: ${({color}) => `${color || COLORS.primaryColor}`};
   transition: all 0.2s ease;
   position: relative;
+  text-decoration: none;
 
   &:hover {
     background-color: ${COLORS.primaryColorOpacity};
@@ -42,13 +43,14 @@ export const StButton = styled.button`
 
   &--link {
     min-width: 100px;
-    height: 40px;
+    //height: 40px;
     color: ${COLORS.lightPrimaryColor};
-    letter-spacing: 0.1em;
     border: 1px solid ${COLORS.lightPrimaryColor};
-    border-radius: 5px;
-    padding: 5px;
-    transition: all 0.25s ease;
+    //letter-spacing: 0.1em;
+    
+    //border-radius: 5px;
+    //padding: 5px;
+    //transition: all 0.25s ease;
     background-color: transparent;
     text-decoration: none;
 
