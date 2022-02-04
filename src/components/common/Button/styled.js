@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {COLORS} from '../styles/colors';
 
 export const StButton = styled.button`
-  min-width: ${({width}) => `${width || '100px'}`};
+  min-width: ${({width}) => `${width || '300px'}`};
   height: 40px;
   padding: 10px 20px;
   font-size: 16px;

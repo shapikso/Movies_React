@@ -26,7 +26,7 @@ const Movies = () => {
 
     const getMovies = async page => {
         try {
-            setState({...state, isLoading: true });
+            setState((prevState) => ({...prevState, isLoading: true }));
             const { data } = await axios.get(URL_MOVIE, {
                 params: {
                     ...normalizeFilters(state.filters),
@@ -34,9 +34,7 @@ const Movies = () => {
                     per_page: MOVIE_ON_PAGE,
                 },
             });
-            setState((prevState) => (
-                {...prevState, movies: [...prevState.movies, ...data], currentPage: prevState.currentPage + 1 }
-            ));
+            setState((prevState) => ({...prevState, movies: [...prevState.movies, ...data], currentPage: prevState.currentPage + 1 }));
         } finally {
             setState((prevState) => ({...prevState, isLoading: false }));
             setTimeout(scrollToDownPage, 200);
@@ -46,14 +44,15 @@ const Movies = () => {
     const loadMore = (e, page) => getMovies(page);
 
     const submitResetFilters = (e) => {
-        setState({...state, currentPage: 1, movies: [] });
+        setState({...state, currentPage: 1, movies: [], isFiltersHidden: true } );
         loadMore(e,1);
     };
+
 
     return (
         <StMovieWrapper>
             <StPlaceRight>
-                <Button className="button--short" onClick={toggleFilters} contentKey="Filters"/>
+                <Button width="100px" onClick={toggleFilters} contentKey="Filters" />
             </StPlaceRight>
             <StMovies>
                 {state.movies.map((element) => (
@@ -73,7 +72,6 @@ const Movies = () => {
                     isLoading={state.isLoading}
                     contentKey="Load more"
                     onClick={loadMore}
-                    width={'300px'}
                 />
             </StCenter>
             <StFiltersModal hidden={state.isFiltersHidden}>

@@ -16,6 +16,7 @@ export const StDoubleRangeInfo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap:5px;
     `;
 export const StDoubleRangeInfoMinMax = styled.div`
   width: 97%;
@@ -42,7 +43,7 @@ export const StSelect = styled.select`
   cursor: pointer;
   border: 1px solid var(--light-primary-color);
   border-radius: 5px;
-  height: 50px;
+  height: 40px;
   font-size: 16px;
   color: var(--light-primary-color);
     `;

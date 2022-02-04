@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Select from '../Selector/Select';
 import {movieLanguages, movieStatus} from '../../../../constants/selectors';
 import Input from '../../../common/Input/InputField';
-import {StFilterRow} from "../styled";
+import {StFilterRow, StInputWrapper} from "../styled";
 
 const FilterHeaders = ({setFilter, title,}) => {
 
@@ -13,11 +13,13 @@ const FilterHeaders = ({setFilter, title,}) => {
 
     return (
         <StFilterRow>
-            <Input value={title}
-                placeholder="Search..."
-                onChange={setSearchTitle}
-                className="movie-title"
-            />
+            <StInputWrapper>
+                <Input value={title}
+                    placeholder="Search..."
+                    onChange={setSearchTitle}
+                    className="movie-title"
+                />
+            </StInputWrapper>
             <Select setSelector={setStatus} options={movieStatus}/>
             <Select setSelector={setLanguage} options={movieLanguages}/>
         </StFilterRow>
