@@ -8,7 +8,9 @@ export const StWrapper= styled.div`
 `;
 
 export const StInput = styled.input`
-  margin: 25px 50px;
+  margin: 25px 0 25px;
+  width: ${({inpWidth}) => inpWidth ? inpWidth : '300px' };;
+  background: transparent;
   padding: 10px 25px;
   background: none;
   border: 1px solid ${COLORS.lightPrimaryColor};
@@ -43,13 +45,22 @@ export const StFormContainer = styled.div `
   }
   &::before {
     z-index: 0;
-    left: -110px;
-    bottom: -110px;
+    left: -76px;
+    bottom: -97px;
   }
   &::after {
     z-index: 2;
     right: -97px;
     top: -97px;
   }
+`;
+
+export const StInvalid = styled.div `
+  position: absolute;
+  width: 300px;
+  height: 22px;
+  font-size: 14px;
+  color: var(--primary-color-invalid);
+  bottom: -2px;
 `;
 

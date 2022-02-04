@@ -1,9 +1,10 @@
 import React from 'react';
+import {StInvalid} from "./styled";
 
 const Error = ({message}) => (
-    <div className="invalid">
+    <StInvalid>
         {message}
-    </div>
+    </StInvalid>
 );
 
 export default Error;

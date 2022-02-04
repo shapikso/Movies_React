@@ -45,3 +45,9 @@ export const StWrapper= styled.div`
   flex-direction: column;
   position: relative;
 `;
+export const StFormSignIn = styled.div `
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 100px;
+`;

@@ -7,7 +7,7 @@ import Button from '../common/Button/Button';
 import {URL_SIGN_IN} from '../../constants/api';
 import '../SingIn/SingIn.scss';
 import {isValidLogin, isValidPassword} from '../../helpers/validation';
-import {StWrapper} from "./styled";
+import {StFormSignIn} from "./styled";
 
 const SingIn = () => {
     const navigate = useNavigate();
@@ -50,7 +50,7 @@ const SingIn = () => {
     };
 
     return (
-        <StWrapper>
+        <StFormSignIn>
             <Form onSubmit={handleSubmitFormSignIn}>
                 <Input
                     label="Login"
@@ -71,7 +71,7 @@ const SingIn = () => {
                 />
                 <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
             </Form>
-        </StWrapper>
+        </StFormSignIn>
     );
 };
 
