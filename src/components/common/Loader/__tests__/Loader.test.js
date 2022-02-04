@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import Loader from "../Loader";
 
-describe('OverviewDetails', () => {
+describe('Loader test', () => {
 
     it('should render correctly', () => {
         const component = shallow(<Loader />);
