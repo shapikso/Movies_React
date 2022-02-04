@@ -22,7 +22,7 @@ const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const formatedRate = formatRate(voteAverage);
     const typeRate = getRateState(voteAverage);
     return (
-        <Link to={`/movies/${id}`} element={<MoviePage id={id}/>}>
+        <Link to={`/movies/${id}`} target={"_blank"} element={<MoviePage id={id}/>}>
             <StCard>
                 <StCardWrapper>
                     <StFilmPoster>

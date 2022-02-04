@@ -6,10 +6,7 @@ const GenreDetails = ({genres}) => (
     <>
         <StyledMovieHeaderSpan>Genres</StyledMovieHeaderSpan>
         <StyledGapsDiv>
-            {genres.map((el) =>
-                <StyledGenresDiv key={el} >
-                    {el}
-                </StyledGenresDiv>)}
+            {genres.map((el) => <StyledGenresDiv key={el} >{el}</StyledGenresDiv>)}
         </StyledGapsDiv>
     </>
 );
