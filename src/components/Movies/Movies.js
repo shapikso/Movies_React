@@ -34,7 +34,9 @@ const Movies = () => {
                     per_page: MOVIE_ON_PAGE,
                 },
             });
-            setState((prevState) => ({...prevState, movies: [...prevState.movies, ...data], currentPage: prevState.currentPage + 1 }));
+            setState((prevState) => (
+                {...prevState, movies: [...prevState.movies, ...data], currentPage: prevState.currentPage + 1 }
+            ));
         } finally {
             setState((prevState) => ({...prevState, isLoading: false }));
             setTimeout(scrollToDownPage, 200);
@@ -48,11 +50,10 @@ const Movies = () => {
         loadMore(e,1);
     };
 
-
     return (
         <StMovieWrapper>
             <StPlaceRight>
-                <Button className="button--short" onClick={toggleFilters} contentKey="Filters" />
+                <Button className="button--short" onClick={toggleFilters} contentKey="Filters"/>
             </StPlaceRight>
             <StMovies>
                 {state.movies.map((element) => (
@@ -72,6 +73,7 @@ const Movies = () => {
                     isLoading={state.isLoading}
                     contentKey="Load more"
                     onClick={loadMore}
+                    width={'300px'}
                 />
             </StCenter>
             <StFiltersModal hidden={state.isFiltersHidden}>
