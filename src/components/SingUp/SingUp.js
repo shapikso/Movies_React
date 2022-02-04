@@ -8,7 +8,7 @@ import { URL_SIGN_UP } from '../../constants/api';
 import { isValidLogin, isValidName, isValidPassword } from '../../helpers/validation';
 import { normalizeFilters } from '../../helpers/format';
 import {useState} from 'react';
-import {StFormSignUp} from './styled';
+import {StFormSignUp, StButtonWrapper} from './styled';
 
 const SingUp  = () => {
 
@@ -108,7 +108,9 @@ const SingUp  = () => {
                     onBlur={handleChangePasswordInput}
                     error={state.error.password}
                 />
-                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
+                <StButtonWrapper>
+                    <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
+                </StButtonWrapper>
             </Form>
         </StFormSignUp>
     );
