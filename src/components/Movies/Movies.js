@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
+import NoData from '../common/NoData/NoData';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
 import Filters from './Filters/Filters';
 import { normalizeFilters } from '../../helpers/format';
@@ -53,26 +54,30 @@ const Movies = () => {
             <StPlaceRight>
                 <Button width="100px" onClick={toggleFilters} contentKey="Filters" />
             </StPlaceRight>
-            <StMovies>
-                {state.movies.map((element) => (
-                    <MovieCard
-                        key={element.id}
-                        id={element.id}
-                        backdropPath={element.backdrop_path}
-                        title={element.title}
-                        runtime={element.runtime}
-                        voteAverage={element.vote_average}
-                    />
-                ))}
-            </StMovies>
-            <StCenter>
-                <Button
-                    className="button"
-                    isLoading={state.isLoading}
-                    contentKey="Load more"
-                    onClick={loadMore}
-                />
-            </StCenter>
+            {(state.movies.length)
+                ? <>
+                    <StMovies>
+                        {state.movies.map((element) => (
+                            <MovieCard
+                                key={element.id}
+                                id={element.id}
+                                backdropPath={element.backdrop_path}
+                                title={element.title}
+                                runtime={element.runtime}
+                                voteAverage={element.vote_average}
+                            />
+                        ))}
+                    </StMovies>
+                    <StCenter>
+                        <Button
+                            className="button"
+                            isLoading={state.isLoading}
+                            contentKey="Load more"
+                            onClick={loadMore}
+                        />
+                    </StCenter>
+                </>
+                :state.isLoading ? false :<NoData/>}
             <StFiltersModal hidden={state.isFiltersHidden}>
                 <Filters
                     closeModal={toggleFilters}
