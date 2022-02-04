@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyledMainDiv, StyledSecondDiv, StyledThirdDiv} from './styled';
 
-const Loader = (btn) => (
+const Loader = () => (
     <StyledMainDiv>
-        <StyledSecondDiv btn={btn}>
+        <StyledSecondDiv>
             {new Array(4).fill(null).map((_, index) => <StyledThirdDiv key={index}/>)}
         </StyledSecondDiv>
     </StyledMainDiv>

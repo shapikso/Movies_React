@@ -23,7 +23,7 @@ const Button = ({
             onClick={handleClick}
             disabled={isDisabled || isLoading}
         >
-            {isLoading ? <Loader btn={isLoading}/> : contentKey}
+            {isLoading ? <Loader /> : contentKey}
         </button>
     );
 };
