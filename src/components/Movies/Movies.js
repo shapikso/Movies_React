@@ -73,6 +73,7 @@ const Movies = () => {
                     isLoading={state.isLoading}
                     contentKey="Load more"
                     onClick={loadMore}
+                    width={'300px'}
                 />
             </StCenter>
             <StFiltersModal hidden={state.isFiltersHidden}>

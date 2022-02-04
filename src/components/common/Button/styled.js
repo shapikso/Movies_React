@@ -15,7 +15,11 @@ export const StButton = styled.button`
   transition: all 0.2s ease;
   position: relative;
   text-decoration: none;
-
+  
+  & div {
+    left: 15%;
+  }
+  
   &:hover {
     background-color: ${COLORS.primaryColorOpacity};
   }
