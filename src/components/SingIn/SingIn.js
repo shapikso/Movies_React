@@ -5,7 +5,6 @@ import Form from '../common/Input/Form';
 import Input from '../common/Input/InputField';
 import Button from '../common/Button/Button';
 import {URL_SIGN_IN} from '../../constants/api';
-import '../SingIn/SingIn.scss';
 import {isValidLogin, isValidPassword} from '../../helpers/validation';
 import {StFormSignIn} from "./styled";
 import {StButtonWrapper} from "../SingUp/styled";

@@ -56,6 +56,7 @@ export const StCard = styled.div`
   height: 250px;
   font-size: 16px;
   position: relative;
+  color: ${COLORS.lightPrimaryColor};
   margin-bottom: 80px;
   border-radius: 10px;
     :hover {

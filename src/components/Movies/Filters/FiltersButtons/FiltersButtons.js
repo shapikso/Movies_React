@@ -6,8 +6,8 @@ import {StFilterButton} from "../styled";
 const FiltersButtons = ({formSubmitHandler, formResetHandler, isResetDisabled}) =>
     (
         <StFilterButton>
-            <Button onClick={formSubmitHandler} className="basic-btn" contentKey ="Submit"/>
-            <Button onClick={formResetHandler} type="reset" isDisabled={isResetDisabled} className="basic-btn"  contentKey="Reset"/>
+            <Button onClick={formResetHandler} type="reset" isDisabled={isResetDisabled} contentKey="Reset"/>
+            <Button onClick={formSubmitHandler} contentKey ="Submit"/>
         </StFilterButton>
     );
 
