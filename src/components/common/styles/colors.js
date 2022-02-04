@@ -14,4 +14,5 @@ export const COLORS = {
     badRate: '#5B5B5B',
     darkPrimary: '#352F44',
     white: '#fff',
+    darkOp7: 'rgba(0, 0, 0, 0.7)',
 };
