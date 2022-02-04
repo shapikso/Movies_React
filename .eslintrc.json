@@ -29,5 +29,16 @@
       "flatTernaryExpressions": false,
       "ignoreComments": false
     }]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.test.js",
+        "**/*.test.jsx"
+      ],
+      "env": {
+        "jest": true
+      }
+    }
+  ]
 }

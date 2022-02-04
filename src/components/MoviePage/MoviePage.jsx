@@ -42,7 +42,11 @@ const MoviePage = () => {
                         <span>{state.film.title}</span>
                     </StyledTitle>
                     <StyledMovieDetails path={state.film.backdrop_path}>
-                        <MovieDetails film={state.film} hours={state.hours} minutes={state.minutes}/>
+                        <MovieDetails
+                            adult={state.film.adult}
+                            hours={state.hours}
+                            minutes={state.minutes}
+                            voteAverage={state.film.vote_average}/>
                         <GenreDetails genres={state.film.name}/>
                         <OverviewDetails overview={state.film.overview}/>
                     </StyledMovieDetails>
