@@ -1,14 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import { Navigate } from "react-router-dom";
-import Form from '../common/Input/Form';
+import Form from '../common/Form/Form';
 import Input from '../common/Input/InputField';
 import Button from '../common/Button/Button';
 import { URL_SIGN_UP } from '../../constants/api';
 import { isValidLogin, isValidName, isValidPassword } from '../../helpers/validation';
 import { normalizeFilters } from '../../helpers/format';
 import {useState} from 'react';
-import {StFormSignUp} from './styled';
+import {StFormSignUp, StButtonWrapper} from './styled';
 
 const SingUp  = () => {
 
@@ -108,7 +108,9 @@ const SingUp  = () => {
                     onBlur={handleChangePasswordInput}
                     error={state.error.password}
                 />
-                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
+                <StButtonWrapper>
+                    <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} />
+                </StButtonWrapper>
             </Form>
         </StFormSignUp>
     );

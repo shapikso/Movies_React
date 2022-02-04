@@ -8,6 +8,7 @@ import {URL_SIGN_IN} from '../../constants/api';
 import '../SingIn/SingIn.scss';
 import {isValidLogin, isValidPassword} from '../../helpers/validation';
 import {StFormSignIn} from "./styled";
+import {StButtonWrapper} from "../SingUp/styled";
 
 const SingIn = () => {
     const navigate = useNavigate();
@@ -69,7 +70,9 @@ const SingIn = () => {
                     onBlur={handleChangePasswordInput}
                     error={state.error.password}
                 />
-                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} width={'300px'}/>
+                <StButtonWrapper>
+                    <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} width={'300px'}/>
+                </StButtonWrapper>
             </Form>
         </StFormSignIn>
     );

@@ -6,3 +6,10 @@ export const StFormSignUp = styled.div `
   position: relative;
   margin-top: 100px;
 `;
+
+export const StButtonWrapper = styled.div `
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px
+`;
