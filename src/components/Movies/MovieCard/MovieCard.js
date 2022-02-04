@@ -1,10 +1,21 @@
-import './MovieCard.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { URL_IMG } from '../../../constants/api';
 import { Link } from 'react-router-dom';
 import { formatRuntime, formatRate, getRateState } from '../../../helpers/format';
 import MoviePage from "../../MoviePage/MoviePage";
+import {GOOD_RATE} from "../../../constants/formatMovie";
+import {
+    StCard,
+    StCardWrapper,
+    StDescription,
+    StFilmDuration,
+    StFilmName,
+    StFilmPoster,
+    StFilmRate,
+    StImg
+} from "./styled";
+
 
 const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const runtimeFormated = formatRuntime(runtime);
@@ -12,24 +23,24 @@ const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
     const typeRate = getRateState(voteAverage);
     return (
         <Link to={`/movies/${id}`} element={<MoviePage id={id}/>}>
-            <div className="movie-card card">
-                <div className="card-wrapper">
-                    <div className="film-poster">
-                        <img src={URL_IMG+backdropPath} className="small-poster" alt="poster" />
-                    </div>
-                    <div className="film-description">
-                        <div className="film-name">
+            <StCard>
+                <StCardWrapper>
+                    <StFilmPoster>
+                        <StImg src={URL_IMG+backdropPath} alt="poster" />
+                    </StFilmPoster>
+                    <StDescription>
+                        <StFilmName>
                             <span>{title}</span>
-                        </div>
-                        <div className="film-duration">
+                        </StFilmName>
+                        <StFilmDuration>
                             <span>{runtimeFormated}</span>
-                        </div>
-                    </div>
-                    <div className={`film-rate ${typeRate}`}>
+                        </StFilmDuration>
+                    </StDescription>
+                    <StFilmRate isGoodRate={typeRate === GOOD_RATE}>
                         <span>{formatedRate}</span>
-                    </div>
-                </div>
-            </div>
+                    </StFilmRate>
+                </StCardWrapper>
+            </StCard>
         </Link >
     );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DoubleRange from '../DoubleRange/DoubleRange';
+import {StFilterRow} from "../styled";
 
 const FiltersRanges = ({ budgetMax, budgetMin, popularityMax, popularityMin, revenueMax, revenueMin,setFilter}) => {
 
@@ -28,7 +29,7 @@ const FiltersRanges = ({ budgetMax, budgetMin, popularityMax, popularityMin, rev
     };
 
     return (
-        <div className="form-filters__ranges">
+        <StFilterRow>
             <DoubleRange setRange={setBudget}
                 title="Budget, $"
                 step="100000"
@@ -52,7 +53,7 @@ const FiltersRanges = ({ budgetMax, budgetMin, popularityMax, popularityMin, rev
                 maxInputValue={revenueMax}
                 minInputValue={revenueMin}
             />
-        </div>
+        </StFilterRow>
     );
 };
 

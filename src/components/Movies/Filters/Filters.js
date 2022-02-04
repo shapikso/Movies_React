@@ -1,39 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './filters.css';
 import FilterHeaders from './FilterHeaders/FilterHeaders';
 import FiltersRanges from './FiltersRanges/FiltersRanges';
 import FilterDate from './FilterDate/FilterDate';
 import FiltersButtons from './FiltersButtons/FiltersButtons';
+import {StClose, StFormFilter} from "./styled";
 
-class Filters extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isResetDisabled: true
-        };
-    }
+const Filters = ({
+    filters: {title,
+        budget_max,
+        budget_min,
+        popularity_max,
+        popularity_min,
+        revenue_max,
+        revenue_min,
+        release_date_first,
+        release_date_last
+    },
+    setFilter,
+    closeModal,
+    onSubmite,
+    clearFilters
+}) => {
+    const [isResetDisabled,setIsResetDisabled] = React.useState(true);
+    const formSubmitHandler = () => {
+        closeModal();
+        onSubmite();
+        setIsResetDisabled(false);
+    };
 
- formSubmitHandler = () => {
-     this.props.closeModal();
-     this.props.onSubmite();
-     this.setState({isResetDisabled: false});
- };
-
-formResetHandler = () => {
-    this.props.clearFilters();
-    setTimeout(() => {
-        this.props.closeModal();
-        this.props.onSubmite();
-        this.setState({isResetDisabled: true});
-    },1);
-};
-
-render() {
-    const {title, budget_max, budget_min, popularity_max,popularity_min, revenue_max, revenue_min, release_date_first, release_date_last} = this.props.filters;
-    const {setFilter, closeModal} = this.props;
+    const formResetHandler = () => {
+        clearFilters();
+        setTimeout(() => {
+            closeModal();
+            onSubmite();
+            setIsResetDisabled(true);
+        },1);
+    };
     return (
-        <form id="filters" name="filters" className="form-filters frosted-glass-effect" action="#">
+        <StFormFilter action="#">
+            <StClose onClick={closeModal} className="close">x</StClose>
             <FilterHeaders title={title} setFilter={setFilter}/>
             <FiltersRanges
                 budgetMax={budget_max}
@@ -49,11 +56,10 @@ render() {
                 releaseDateLast={release_date_last}
                 setFilter={setFilter}
             />
-            <FiltersButtons closeModal={closeModal} formResetHandler={this.formResetHandler} formSubmitHandler={this.formSubmitHandler}/>
-        </form>
+            <FiltersButtons isResetDisabled={isResetDisabled} formResetHandler={formResetHandler} formSubmitHandler={formSubmitHandler}/>
+        </StFormFilter>
     );
-}
-}
+};
 
 Filters.propTypes = {
     closeModal: PropTypes.func.isRequired,

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Navigate } from "react-router-dom";
-import Form from '../common/Input/Form';
+import Form from '../common/Form/Form';
 import Input from '../common/Input/InputField';
 import Button from '../common/Button/Button';
 import { URL_SIGN_UP } from '../../constants/api';

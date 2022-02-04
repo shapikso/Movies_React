@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import Select from '../Selector/Select';
 import {movieLanguages, movieStatus} from '../../../../constants/selectors';
 import Input from '../../../common/Input/InputField';
+import {StFilterRow} from "../styled";
 
-const FilterHeaders = ({setFilter, title}) => {
+const FilterHeaders = ({setFilter, title,}) => {
 
     const setStatus = (status) => setFilter('status', status);
     const setLanguage = (language) => setFilter('language', language);
     const setSearchTitle = (title) => setFilter('title', title);
 
     return (
-        <div className="form-filters__header">
+        <StFilterRow>
             <Input value={title}
                 placeholder="Search..."
                 onChange={setSearchTitle}
@@ -19,7 +20,7 @@ const FilterHeaders = ({setFilter, title}) => {
             />
             <Select setSelector={setStatus} options={movieStatus}/>
             <Select setSelector={setLanguage} options={movieLanguages}/>
-        </div>
+        </StFilterRow>
     );
 };
 

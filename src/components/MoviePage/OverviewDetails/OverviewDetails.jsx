@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {StyledGapsDiv, StyledHeaderSpan, StyledOverviewParagraph} from './styled';
 
 const OverviewDetails = ({overview}) => (
     <div>
-        <span className='movie-header'>Overview</span>
-        <div className='base-gaps' id='overview'>
-            <p className='overview-text'>{overview}</p>
-        </div>
+        <StyledHeaderSpan>Overview</StyledHeaderSpan>
+        <StyledGapsDiv>
+            <StyledOverviewParagraph>{overview}</StyledOverviewParagraph>
+        </StyledGapsDiv>
     </div>
 );
 

@@ -17,3 +17,5 @@ export const getRateState = (rate) => {
 };
 
 export const normalizeFilters = (filters) => Object.entries(filters).reduce((acc, [key, value]) => value || value === 0 ? {...acc, [key]: value} : acc, {});
+
+export const formatTime = (runtime) => ({ hours: Math.floor(runtime / 60), minutes: runtime % 60});
