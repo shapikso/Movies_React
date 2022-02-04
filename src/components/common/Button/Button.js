@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StButton} from "./styled";
+import Loader from "../Loader/Loader";
 
-const Button = ({ type = 'button', isDisabled, onClick, contentKey, width, color }) => (
+const Button = ({ type = 'button', isDisabled, onClick, contentKey, width, color, isLoading }) => (
     <StButton type={type} onClick={onClick} disabled={isDisabled} width={width} color={color}>
-        {contentKey}
+        {isLoading ? <Loader /> : contentKey}
     </StButton>
 );
 
@@ -14,6 +15,7 @@ Button.propTypes = {
     width: PropTypes.string,
     color: PropTypes.string,
     isDisabled: PropTypes.bool,
+    isLoading: PropTypes.bool,
     onClick: PropTypes.func,
     contentKey: PropTypes.string.isRequired,
 };

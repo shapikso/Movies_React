@@ -5,9 +5,9 @@ import {StyledMovieDetails, StyledTitle, StyledWrapper} from './styled';
 import MovieDetails from './MovieDetails/MovieDetails';
 import GenreDetails from './GenreDetails/GenreDetails';
 import OverviewDetails from './OverviewDetails/OverviewDetails';
-import Loader from '../common/Loader/Loader';
 import {MOVIE_BY_ID} from '../../constants/api';
 import {formatTime} from '../../helpers/format';
+import MainLoader from "../common/Loader/MainLoader";
 
 const MoviePage = () => {
 
@@ -35,7 +35,7 @@ const MoviePage = () => {
     return (
         <>
             {state.isLoading
-                ? <Loader/>
+                ? <MainLoader/>
                 :
                 <StyledWrapper>
                     <StyledTitle>
