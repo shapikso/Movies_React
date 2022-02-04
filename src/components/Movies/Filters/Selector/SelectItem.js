@@ -1,8 +1,9 @@
 import React from 'react';
+import {StOption} from "../../styled";
 
 const SelectItem = ({value, title}) => {
     return (
-        <option value={value}>{title}</option>
+        <StOption value={value}>{title}</StOption>
     );
 };
 

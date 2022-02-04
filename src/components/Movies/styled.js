@@ -64,6 +64,9 @@ export const StFiltersModal = styled.div`
   padding: 50px;
   justify-content: center;
   align-items: center;
-  display: ${({hidden}) => {hidden ? 'none' : 'flex';}};
+  display: ${({hidden}) => hidden ? 'none' : 'flex'};
 `;
 
+export const StOption = styled.option`
+  color: #151C26;
+`;

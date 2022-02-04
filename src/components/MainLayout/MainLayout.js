@@ -4,31 +4,32 @@ import Logo from './Logo/Logo';
 import {Link, useLocation} from "react-router-dom";
 import Button from '../common/Button/Button';
 import {getNextRoute} from "../../helpers/route";
+import {StButtonLinkWrapper, StContainer, StHeaderContainer, StHeaderLink} from "./styled";
 
 const MainLayout = (props) => {
     const { link, content } = getNextRoute(useLocation().pathname);
     return (
-        <div>
-            <header className="header">
-                <div className="container">
-                    <div className="header__container">
-                        <div className="header__logo">
+        <>
+            <header>
+                <StContainer>
+                    <StHeaderContainer>
+                        <div>
                             <Link to="/movies">
                                 <Logo/>
                             </Link>
                         </div>
-                        <div className="header__links">
-                            <div className="basic-link header__links-item">
+                        <StHeaderLink>
+                            <StButtonLinkWrapper>
                                 <Link to={link}>
-                                    <Button className="button--link" contentKey={content}/>
+                                    <Button width="100px" color="transparent" contentKey={content}/>
                                 </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </StButtonLinkWrapper>
+                        </StHeaderLink>
+                    </StHeaderContainer>
+                </StContainer>
             </header>
             <main className="main">{props.children}</main>
-        </div>
+        </>
     );
 };
 

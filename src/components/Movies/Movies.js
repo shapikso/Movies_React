@@ -44,15 +44,18 @@ const Movies = () => {
     const loadMore = (e, page) => getMovies(page);
 
     const submitResetFilters = (e) => {
-        setState({...state, currentPage: 1, movies: [] });
-        loadMore(e,1);
+        setState((prevState) => ({...prevState, currentPage: 1, movies: [], isFiltersHidden: true }) );
+        setTimeout(() => {
+            loadMore(e,1);
+        }, 20);
+
     };
 
 
     return (
         <StMovieWrapper>
             <StPlaceRight>
-                <Button className="button--short" onClick={toggleFilters} contentKey="Filters" />
+                <Button width="100px" onClick={toggleFilters} contentKey="Filters" />
             </StPlaceRight>
             <StMovies>
                 {state.movies.map((element) => (

@@ -38,6 +38,7 @@ export const StFilterRow = styled.div`
   flex-wrap: wrap;
   margin-bottom: 40px;
   gap: 25px;
+  align-items: center;
     `;
 export const StFilterButton = styled.div`
   display: flex;
@@ -50,3 +51,7 @@ export const StFilterButton = styled.div`
     width: 100%;
   }
     `;
+
+export const StInputWrapper = styled.div`
+    width: 500px;
+ `;
