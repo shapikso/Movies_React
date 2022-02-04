@@ -1,85 +1,79 @@
-import React, { Component } from 'react';
-import { Navigate } from "react-router-dom";
+import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 import Form from '../common/Input/Form';
 import Input from '../common/Input/InputField';
-import { URL_SIGN_IN } from '../../constants/api';
 import Button from '../common/Button/Button';
+import {URL_SIGN_IN} from '../../constants/api';
 import '../SingIn/SingIn.scss';
-import { isValidLogin, isValidPassword } from '../../helpers/validation';
+import {isValidLogin, isValidPassword} from '../../helpers/validation';
+import {StFormSignIn} from "./styled";
 
-class SingIn extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            redirect: false,
+const SingIn = () => {
+    const navigate = useNavigate();
+    const [state, setState] = useState({
+        user: '',
+        isLoading: false,
+        password: '',
+        error: {
             user: '',
             password: '',
-            error: {
-                user: '',
-                password: '',
-            },
-        };
+        }
     }
+    );
 
+    const handleChangeUser = value => setState({...state, user: value});
 
+    const handleChangePassword = value => setState({...state, password: value});
 
-    handleChangeUser = value => this.setState({ user: value });
-
-    handleChangePassword = value => this.setState({ password: value });
-
-    handleChangePasswordInput = () => {
-        const error = isValidPassword(this.state.password);
-        this.setState({ error: { ...this.state.error, password: error } });
-    };
-    handleChangeLoginInput = () => {
-        const error = isValidLogin(this.state.user);
-        this.setState({ error: { ...this.state.error, user: error } });
+    const handleChangePasswordInput = () => {
+        const error = isValidPassword(state.password);
+        setState({...state, error: {...state.error, password: error}});
     };
 
-    handleSubmitFormSignIn = async event => {
+    const handleChangeLoginInput = () => {
+        const error = isValidLogin(state.user);
+        setState({...state, error: {...state.error, user: error}});
+    };
+
+    const handleSubmitFormSignIn = async event => {
         event.preventDefault();
         try {
-            this.setState({ isLoading: true });
-            const body = { login: this.state.user, password: this.state.password };
-            const { headers } = await axios.post(URL_SIGN_IN, body);
+            setState({...state, isLoading: true});
+            const body = {login: state.user, password: state.password};
+            const {headers} = await axios.post(URL_SIGN_IN, body);
             localStorage.setItem('token', headers.token);
-            this.setState({redirect:true});
+            navigate('/movies');
         } finally {
-            this.setState({ isLoading: false });
+            setState({...state, isLoading: false});
         }
     };
 
-    render() {
-        if (this.state.redirect) {
-            return <Navigate to={'/movies'} />;
-        }
-        return (
-            <div className="form-wrapper">
-                <Form onSubmit={this.handleSubmitFormSignIn}>
-                    <Input
-                        label="Login"
-                        value={this.state.user}
-                        placeholder="Enter your login"
-                        onChange={this.handleChangeUser}
-                        onBlur={this.handleChangeLoginInput}
-                        error={this.state.error.user}
-                    />
-                    <Input
-                        label="Password"
-                        type="password"
-                        value={this.state.password}
-                        placeholder="Enter your password"
-                        onChange={this.handleChangePassword}
-                        onBlur={this.handleChangePasswordInput}
-                        error={this.state.error.password}
-                    />
-                    <Button type="submit" contentKey="SUBMIT" isLoading={this.state.isLoading} />
-                </Form>
-            </div>
-        );
-    }
-}
+    return (
+        <StFormSignIn>
+            <Form onSubmit={handleSubmitFormSignIn}>
+                <Input
+                    label="Login"
+                    value={state.user}
+                    placeholder="Enter your login"
+                    onChange={handleChangeUser}
+                    onBlur={handleChangeLoginInput}
+                    error={state.error.user}
+                />
+                <Input
+                    label="Password"
+                    type="password"
+                    value={state.password}
+                    placeholder="Enter your password"
+                    onChange={handleChangePassword}
+                    onBlur={handleChangePasswordInput}
+                    error={state.error.password}
+                />
+                <Button type="submit" contentKey="SUBMIT" isLoading={state.isLoading} width={'300px'}/>
+            </Form>
+        </StFormSignIn>
+    );
+};
 
 export default SingIn;
 
