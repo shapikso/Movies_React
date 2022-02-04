@@ -12,14 +12,10 @@ describe('GenreDetails', () => {
     });
     it('should render 2 props from array', () => {
         const component = mount(<GenreDetails {...props} />);
-        // eslint-disable-next-line no-console
-        console.log(component.debug());
         expect(component.find('div div')).toHaveLength(props.genres.length);
     });
     it('should`t render anything ', () => {
         const component = mount(<GenreDetails {...props} genres={[]}/>);
-        // eslint-disable-next-line no-console
-        console.log(component.debug());
         expect(component.find('div div')).toHaveLength(0);
     });
 });

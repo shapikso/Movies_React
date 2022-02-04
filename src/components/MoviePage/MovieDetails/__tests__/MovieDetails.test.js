@@ -15,26 +15,18 @@ describe('MovieDetails', ()=> {
     });
     it('should checked render adult', () => {
         const component = mount(<MovieDetails {...props} />);
-        // eslint-disable-next-line no-console
-        console.log(component.debug());
         expect(component.props().adult).toEqual(props.adult);
     });
     it('should checked render hour', () => {
         const component = mount(<MovieDetails {...props} />);
-        // eslint-disable-next-line no-console
-        console.log(component.debug());
         expect(component.props().hours).toEqual(props.hours);
     });
     it('should checked render minutes', () => {
         const component = mount(<MovieDetails {...props} />);
-        // eslint-disable-next-line no-console
-        console.log(component.debug());
         expect(component.props().minutes).toEqual(props.minutes);
     });
     it('should checked prop rate', () => {
         const component = mount(<MovieDetails {...props} />);
-        // eslint-disable-next-line no-console
-        console.log(component.debug());
         expect(component.props().voteAverage).toEqual(props.voteAverage);
     });
 });

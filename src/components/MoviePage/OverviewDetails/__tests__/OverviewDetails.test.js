@@ -12,8 +12,6 @@ describe('OverviewDetails', () => {
     });
     it('should render overview props', () => {
         const component = mount(<OverviewDetails {...props} />);
-        // eslint-disable-next-line no-console
-        console.log(component.debug());
-        expect(component.props().overview).toEqual(props.overview);
+        expect(component.find('p').text()).toEqual(props.overview);
     });
 });
