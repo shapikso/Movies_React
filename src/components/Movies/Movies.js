@@ -26,7 +26,7 @@ const Movies = () => {
 
     const getMovies = async page => {
         try {
-            setState({...state, isLoading: true });
+            setState((prevState) => ({...prevState, isLoading: true }));
             const { data } = await axios.get(URL_MOVIE, {
                 params: {
                     ...normalizeFilters(state.filters),
@@ -44,11 +44,8 @@ const Movies = () => {
     const loadMore = (e, page) => getMovies(page);
 
     const submitResetFilters = (e) => {
-        setState((prevState) => ({...prevState, currentPage: 1, movies: [], isFiltersHidden: true }) );
-        setTimeout(() => {
-            loadMore(e,1);
-        }, 20);
-
+        setState({...state, currentPage: 1, movies: [], isFiltersHidden: true } );
+        loadMore(e,1);
     };
 
 
