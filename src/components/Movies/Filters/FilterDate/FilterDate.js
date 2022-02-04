@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
+import './date.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 import {StFilterRow} from "../styled";
 import {StDate} from "../DoubleRange/styled";

@@ -5,7 +5,7 @@ import {movieLanguages, movieStatus} from '../../../../constants/selectors';
 import Input from '../../../common/Input/InputField';
 import {StFilterRow, StInputWrapper} from "../styled";
 
-const FilterHeaders = ({setFilter, title,}) => {
+const FilterHeaders = ({language, status, setFilter, title,}) => {
 
     const setStatus = (status) => setFilter('status', status);
     const setLanguage = (language) => setFilter('language', language);
@@ -17,11 +17,10 @@ const FilterHeaders = ({setFilter, title,}) => {
                 <Input value={title}
                     placeholder="Search..."
                     onChange={setSearchTitle}
-                    className="movie-title"
                 />
             </StInputWrapper>
-            <Select setSelector={setStatus} options={movieStatus}/>
-            <Select setSelector={setLanguage} options={movieLanguages}/>
+            <Select value={status} setSelector={setStatus} options={movieStatus}/>
+            <Select value={language} setSelector={setLanguage} options={movieLanguages}/>
         </StFilterRow>
     );
 };

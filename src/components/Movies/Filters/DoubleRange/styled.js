@@ -18,13 +18,6 @@ export const StDoubleRangeInfo = styled.div`
   align-items: center;
   gap:5px;
     `;
-export const StDoubleRangeInfoMinMax = styled.div`
-  width: 97%;
-  background: none;
-  color: var(--light-primary-color);
-  padding: 10px;
-  text-align: center;
-    `;
 
 export const StDoubleRangePlace= styled.div`
   width: 100%;

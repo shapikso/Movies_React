@@ -14,16 +14,15 @@ const Movies = () => {
     const [state, setState] = useState({
         movies: [],
         filters: FILTERS_INIT,
-        isFiltersSet: false,
         currentPage: 1,
         isFiltersHidden: true,
         isLoading: true,
     });
     useEffect(() => getMovies(), []);
 
-    const setFilter = (key, value) => setState( {...state, filters: { ...state.filters, [key]: value }, isFiltersSet: true});
-    const toggleFilters = () => setState({...state, isFiltersHidden: !state.isFiltersHidden });
-    const clearFilters = () => setState({...state, filters: FILTERS_INIT});
+    const setFilter = (key, value) => setState((prevState) => ({...prevState, filters: { ...prevState.filters, [key]: value }}));
+    const toggleFilters = () => setState((prevState)=>({...prevState, isFiltersHidden: !prevState.isFiltersHidden }));
+    const clearFilters = () => setState((prevState) =>({...prevState, filters: FILTERS_INIT}));
 
     const getMovies = async page => {
         try {
@@ -45,9 +44,10 @@ const Movies = () => {
     const loadMore = (e, page) => getMovies(page);
 
     const submitResetFilters = (e) => {
-        setState({...state, currentPage: 1, movies: [], isFiltersHidden: true } );
+        setState((prevState) => ({...prevState, currentPage: 1, movies: [], isFiltersHidden: true }) );
         loadMore(e,1);
     };
+
 
     return (
         <StMovieWrapper>

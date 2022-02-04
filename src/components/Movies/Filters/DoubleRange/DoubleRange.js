@@ -15,8 +15,8 @@ const DoubleRange = ({title,minValue,maxValue, step, setRange, minInputValue, ma
         <StDoubleRange>
             <StDoubleRangeTittle>{title}</StDoubleRangeTittle>
             <StDoubleRangeInfo>
-                <InputField className="double-range__info-min" readOnly={true} value={minInputValue} />
-                <InputField className="double-range__info-min" readOnly={true} value={maxInputValue} />
+                <InputField readOnly={true} value={minInputValue} />
+                <InputField readOnly={true} value={maxInputValue} />
             </StDoubleRangeInfo>
             <StDoubleRangePlace>
                 <Range
