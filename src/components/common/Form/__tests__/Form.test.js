@@ -13,12 +13,10 @@ describe ("Form", () => {
     });
     it('should render checked prop', () => {
         const component = mount(<Form {...props} />);
-        console.log(component.debug());
         expect(component.find('input')).toHaveLength(1)
     });
     it('should render checked prop', () => {
         const component = mount(<Form {...props} />);
-        console.log(component.debug());
         component.find('form').getElement().props.onSubmit()
         expect(props.onSubmit).toHaveBeenCalled()
     });
