@@ -36,7 +36,7 @@ const MovieCard = ({ id, backdropPath, title, runtime, voteAverage }) => {
                             <span>{runtimeFormated}</span>
                         </StFilmDuration>
                     </StDescription>
-                    <StFilmRate isGoodRate={typeRate === GOOD_RATE}>
+                    <StFilmRate isGoodRate={typeRate === GOOD_RATE} data-testId='StFilmRate'>
                         <span>{formatedRate}</span>
                     </StFilmRate>
                 </StCardWrapper>
