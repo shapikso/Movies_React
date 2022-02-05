@@ -82,9 +82,7 @@ const Movies = () => {
                         />
                     </StCenter>
                 </>
-            ) : state.isLoading ? (
-                false
-            ) : (
+            ) : state.isLoading ? false : (
                 <NoData />
             )}
             <StFiltersModal hidden={state.isFiltersHidden} data-testid="filter-modal">
