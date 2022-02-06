@@ -21,7 +21,7 @@ describe('FiltersButtons', ()=> {
         component.find('button').at(0).getElement().props.onClick();
         expect(props.formResetHandler).toHaveBeenCalled();
     });
-    it('should reset form on click', () => {
+    it('should submit form on click', () => {
         const component = mount(<FiltersButtons {...props} />);
         component.find('button').at(1).getElement().props.onClick();
         expect(props.formSubmitHandler).toHaveBeenCalled();

@@ -53,7 +53,7 @@ describe('FiltersRanges', ()=> {
         expect(props.setFilter).toHaveBeenCalledWith('popularity_max',200);
     });
     it('should changed Vote ', () => {
-        const component = mount(<FiltersRanges {...props} />);;
+        const component = mount(<FiltersRanges {...props} />);
         component.find('DoubleRange').at(2).getElement().props.setRange(0,300);
         expect(props.setFilter).toHaveBeenCalledWith('revenue_min',0);
         expect(props.setFilter).toHaveBeenCalledWith('revenue_max',300);

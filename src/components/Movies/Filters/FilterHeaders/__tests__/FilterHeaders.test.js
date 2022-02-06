@@ -19,17 +19,12 @@ describe('FilterHeaders', ()=> {
     });
     it('should changed title', () => {
         const component = mount(<FilterHeaders {...props} />);
-        component.find('input').simulate('change', {target: { value : props.title}});
+        component.find('input').getElement().props.onChange({target: { value : props.title}});
         expect(props.setFilter).toHaveBeenCalledWith('title',props.title);
-    });
-    it('should changed title', () => {
-        const component = mount(<FilterHeaders {...props} />);
-        component.find('input').simulate('change', {target: { value : 'aaaaa'}});
-        expect(props.setFilter).toHaveBeenCalledWith('title','aaaaa');
     });
     it('should changed language', () => {
         const component = mount(<FilterHeaders {...props} />);
-        component.find('select').find('select').at(1).simulate('change', {target: { value :  props.language}});
+        component.find('select').find('select').at(1).getElement().props.onChange({target: { value :  props.language}});
         expect(props.setFilter).toHaveBeenCalledWith('language', props.language);
     });
     it('should changed status', () => {

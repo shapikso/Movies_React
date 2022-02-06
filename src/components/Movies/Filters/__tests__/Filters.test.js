@@ -12,8 +12,8 @@ describe('Filters', ()=> {
             title: 'aaaaa',
             language: 'en',
             status: 'Released',
-            release_date_first: '02 October 2022 14:48 UTC',
-            release_date_last: '02 October 2021 14:48 UTC',
+            release_date_first: '',
+            release_date_last: '',
             budget_min: 0,
             budget_max: 5000000,
             popularity_min: 0,
@@ -27,14 +27,18 @@ describe('Filters', ()=> {
         expect(component).toMatchSnapshot();
     });
     it('should clear filters', () => {
-        const component = shallow(<Filters {...props} />);
-        component.find('FiltersButtons').getElement().props.formResetHandler();
+        const component = mount(<Filters {...props} />);
+        component.find('button').at(0).getElement().props.onClick();
         expect(props.clearFilters).toHaveBeenCalled();
     });
-    it('should clear filters', () => {
-        const component = shallow(<Filters {...props} />);
-        component.find('FiltersButtons').getElement().props.formSubmitHandler();
+    it('should check on submit button', () => {
+        const component = mount(<Filters {...props} />);
+        component.find('button').at(1).getElement().props.onClick();
         expect(props.closeModal).toHaveBeenCalled();
         expect(props.onSubmite).toHaveBeenCalled();
+    });
+    it('should render prop setFilter correctly', () => {
+        const component = shallow(<Filters {...props} />);
+        expect(component.find('FilterHeaders').getElement().props.setFilter).toEqual(props.setFilter);
     });
 });

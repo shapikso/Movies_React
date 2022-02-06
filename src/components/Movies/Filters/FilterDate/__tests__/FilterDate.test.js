@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import FilterDate from "../FilterDate";
 
 describe('FilterDate', ()=> {
@@ -13,9 +13,9 @@ describe('FilterDate', ()=> {
         expect(component).toMatchSnapshot();
     });
     it('should checked render first date', () => {
-            const component = shallow(<FilterDate {...props} />);
-            expect(component.find('r').at(0).getElement().props.selected).toEqual(props.releaseDateFirst);
-        });
+        const component = shallow(<FilterDate {...props} />);
+        expect(component.find('r').at(0).getElement().props.selected).toEqual(props.releaseDateFirst);
+    });
     it('should checked render last date', () => {
         const component = shallow(<FilterDate {...props} />);
         expect(component.find('r').at(1).getElement().props.selected).toEqual(props.releaseDateLast);

@@ -1,7 +1,6 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
 import Select from "../Select";
-import FilterDate from "../../FilterDate/FilterDate";
 
 describe('Select', ()=> {
     const props = {
@@ -15,12 +14,11 @@ describe('Select', ()=> {
     });
     it('should checked render value', () => {
         const component = mount(<Select {...props} />);
-        console.log(component.find('select').getElement().props);
         expect(component.find('select').getElement().props.value).toEqual(props.value);
     });
     it('should checked render all options', () => {
         const component = mount(<Select {...props} />);
-        expect(component.find('select').getElement().props.children.length).toEqual(props.options.length);
+        expect(component.find('select').getElement().props.children).toHaveLength(props.options.length);
     });
     it('should change value', () => {
         const component = mount(<Select {...props} />);

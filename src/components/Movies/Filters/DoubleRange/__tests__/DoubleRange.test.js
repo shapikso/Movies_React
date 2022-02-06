@@ -38,7 +38,7 @@ describe('DoubleRange', ()=> {
     });
     it('should change range', () => {
         const component = shallow(<DoubleRange {...props} />);
-        component.find('ComponentWrapper').getElement().props.onChange('50');
-        expect(props.setRange).toHaveBeenCalled();
+        component.find('ComponentWrapper').getElement().props.onChange('59');
+        expect(props.setRange).toHaveBeenCalledWith('5','9');
     });
 });
