@@ -1,9 +1,17 @@
 {
-  "plugins": ["react"],
-  "env": {"browser": true},
+  "plugins": ["react","jest"],
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
   "parser": "babel-eslint",
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
     "react/prop-types": 0,
     "linebreak-style": 0,
     "semi": "error",
