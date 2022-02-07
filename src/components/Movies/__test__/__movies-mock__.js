@@ -1,4 +1,4 @@
-export default [
+export default { data: [
     {
         id: 6,
         adult: false,
@@ -159,4 +159,5 @@ export default [
         vote_count: 1959,
         runtime: 149,
     },
-];
+]
+};
