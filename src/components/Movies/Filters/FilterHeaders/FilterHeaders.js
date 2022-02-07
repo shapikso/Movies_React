@@ -27,7 +27,9 @@ const FilterHeaders = ({language, status, setFilter, title,}) => {
 
 FilterHeaders.propTypes = {
     setFilter: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    language: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired
 };
 
 export default FilterHeaders;

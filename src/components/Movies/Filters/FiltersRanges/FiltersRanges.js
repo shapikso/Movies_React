@@ -7,25 +7,18 @@ const FiltersRanges = ({ budgetMax, budgetMin, popularityMax, popularityMin, rev
 
     const setBudget = (minBudget, maxBudget) => {
         setFilter('budget_min', minBudget);
-        setTimeout( () => {
-            setFilter('budget_max', maxBudget);
-        }, 1);
+        setFilter('budget_max', maxBudget);
 
     };
 
     const setPopularity = (minPopularity, maxPopularity) => {
         setFilter('popularity_min', minPopularity);
-        setTimeout( () => {
-            setFilter('popularity_max', maxPopularity);
-        }, 1);
+        setFilter('popularity_max', maxPopularity);
     };
 
     const setVote = (minVote, maxVote) => {
         setFilter('revenue_min', minVote);
-        setTimeout( () => {
-            setFilter('revenue_max', maxVote);
-        }, 1);
-
+        setFilter('revenue_max', maxVote);
     };
 
     return (
