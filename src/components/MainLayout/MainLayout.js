@@ -6,7 +6,7 @@ import Button from '../common/Button/Button';
 import {getNextRoute} from "../../helpers/route";
 import {StButtonLinkWrapper, StContainer, StHeaderContainer, StHeaderLink} from "./styled";
 
-const MainLayout = (props) => {
+const MainLayout = ({children}) => {
     const { link, content } = getNextRoute(useLocation().pathname);
     return (
         <>
@@ -28,7 +28,7 @@ const MainLayout = (props) => {
                     </StHeaderContainer>
                 </StContainer>
             </header>
-            <main className="main">{props.children}</main>
+            <main className="main">{children}</main>
         </>
     );
 };
