@@ -14,7 +14,8 @@ const Filters = ({
     onSubmite,
     clearFilters
 }) => {
-    const {title,
+    const {
+        title,
         budget_max,
         budget_min,
         popularity_max,
@@ -33,7 +34,6 @@ const Filters = ({
 
     const formResetHandler = () => {
         clearFilters();
-
     };
     return (
         <StFormFilter action="#">
@@ -48,10 +48,7 @@ const Filters = ({
                 revenueMax={revenue_max}
                 setFilter={setFilter}
             />
-            <FilterDate
-                releaseDateFirst={release_date_first}
-                releaseDateLast={release_date_last}
-                setFilter={setFilter}
+            <FilterDate releaseDateFirst={release_date_first} releaseDateLast={release_date_last} setFilter={setFilter}
             />
             <FiltersButtons
                 isResetDisabled={JSON.stringify(filters) === JSON.stringify(FILTERS_INIT)}
