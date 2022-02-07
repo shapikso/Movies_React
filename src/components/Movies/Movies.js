@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import axios from 'axios';
 import Button from '../common/Button/Button';
 import MovieCard from './MovieCard/MovieCard';
@@ -11,14 +11,14 @@ import { FILTERS_INIT } from '../../constants/filters';
 import { StCenter, StFiltersModal, StMovies, StMovieWrapper, StPlaceRight } from './styled';
 
 const Movies = () => {
-    const [state, setState] = useState({
+    const [state, setState] = React.useState({
         movies: [],
         filters: FILTERS_INIT,
         currentPage: 1,
         isFiltersHidden: true,
         isLoading: true,
     });
-    useEffect(() => getMovies(), []);
+    React.useEffect(() => getMovies(), []);
 
     const setFilter = (key, value) =>
         setState((prevState) => ({ ...prevState, filters: { ...prevState.filters, [key]: value } }));
