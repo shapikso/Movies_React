@@ -31,35 +31,23 @@ describe('Movies', () => {
 
     it ('should set filter ', () => {
         const component = mount(<Movies/>);
-        console.log(component.debug());
         component.find('InputField').at(0).getElement().props.onChange({target:{ value : 'bla bla'}});
         expect(setStateMock).toHaveBeenCalled();
     });
 
     it(`should show filter modal`, () => {
         const component = mount(<Movies/>);
-        console.log(component.debug());
-        component.find('button').at(0).getElement().props.onClick();
-        expect(setStateMock).toHaveBeenCalled();
-    });
-
-    it(`should show filter modal`, () => {
-        const component = mount(<Movies/>);
-        console.log(component.debug());
         component.find('button').at(0).getElement().props.onClick();
         expect(setStateMock).toHaveBeenCalled();
     });
 
     it(`should clear filters in modal`, () => {
         const component = mount(<Movies/>);
-        console.log(component.find('button').at(1).getElement().props);
         component.find('button').at(1).getElement().props.onClick();
         expect(setStateMock).toHaveBeenCalled();
     });
     it(`should submit filters`,  () => {
         const component = mount(<Movies/>);
-        console.log(component.debug());
-        console.log(component.find('button').at(2).getElement().props);
         component.find('button').at(2).getElement().props.onClick();
         expect(setStateMock).toHaveBeenCalled();
     });
