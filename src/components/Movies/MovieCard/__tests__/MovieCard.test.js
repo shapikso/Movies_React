@@ -1,8 +1,13 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import MovieCard from "../MovieCard";
 import { COLORS } from '../../../common/styles/colors';
 import 'jest-styled-components';
+
+jest.mock('react-router-dom', () => ({
+    useLocation: () => ({ pathname: '/' }),
+    Link: "a",
+}));
 
 describe('MovieCard', () => {
     let props;
@@ -27,12 +32,12 @@ describe('MovieCard', () => {
     });
 
     it(`should set background-color to ${COLORS.badRate} if voteAverage < 7 `, () => {
-        const component = shallow(<MovieCard {...props} voteAverage={6} />);
-        expect(component.find('[data-testId="StFilmRate"]')).toHaveStyleRule('background-color', `${COLORS.badRate}`);
+        const component = mount(<MovieCard {...props}/>);
+        expect(component.find('.movie-rate').at(0).getElement().props.isGoodRate).toBeTruthy();
     });
 
     it(`should set background-color to ${COLORS.goodRate} if voteAverage >= 7`, () => {
-        const component = shallow(<MovieCard {...props} voteAverage={8} />);
-        expect(component.find('[data-testId="StFilmRate"]')).toHaveStyleRule('background-color', `${COLORS.goodRate}`);
+        const component = shallow(<MovieCard {...props} voteAverage={2} />);
+        expect(component.find('.movie-rate').at(0).getElement().props.isGoodRate).toBeFalsy();
     });
 });

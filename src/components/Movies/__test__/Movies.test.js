@@ -9,7 +9,6 @@ import moviesData from './__movies-mock__';
 
 describe('Movies', () => {
     const setStateMock = jest.fn();
-
     beforeEach(() => {
         React.useState = jest.fn().mockReturnValue([{
             movies: [],
@@ -86,7 +85,7 @@ describe('async Movies', () => {
         jest.clearAllMocks();
     });
     it(`should load films`, async () => {
-        let component
+        let component;
         await act(async () => {
             await axios.get.mockImplementationOnce(() => Promise.resolve(data));
             component = mount(<Movies/>);
