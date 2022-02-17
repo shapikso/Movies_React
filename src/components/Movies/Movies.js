@@ -1,32 +1,33 @@
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import axios from 'axios';
 import Button from '../common/Button/Button';
-import MovieCard from './MovieCard/MovieCard';
-import NoData from '../common/NoData/NoData';
 import { URL_MOVIE, MOVIE_ON_PAGE } from '../../constants/api';
 import Filters from './Filters/Filters';
 import { normalizeFilters } from '../../helpers/format';
 import { scrollToDownPage } from '../../helpers/scroll';
-import {FILTERS_INIT} from '../../constants/filters';
-import {StCenter, StFiltersModal, StMovies, StMovieWrapper, StPlaceRight} from "./styled";
+import { FILTERS_INIT } from '../../constants/filters';
+import { StFiltersModal, StMovieWrapper, StPlaceRight } from './styled';
+import MoviesMainWrapper from "./MoviesMainWrapper/MoviesMainWrapper";
 
 const Movies = () => {
-    const [state, setState] = useState({
+    const [state, setState] = React.useState({
         movies: [],
         filters: FILTERS_INIT,
         currentPage: 1,
         isFiltersHidden: true,
         isLoading: true,
     });
-    useEffect(() => getMovies(), []);
+    React.useEffect(() => getMovies(), []);
 
-    const setFilter = (key, value) => setState((prevState) => ({...prevState, filters: { ...prevState.filters, [key]: value }}));
-    const toggleFilters = () => setState((prevState)=>({...prevState, isFiltersHidden: !prevState.isFiltersHidden }));
-    const clearFilters = () => setState((prevState) =>({...prevState, filters: FILTERS_INIT}));
+    const setFilter = (key, value) =>
+        setState((prevState) => ({ ...prevState, filters: { ...prevState.filters, [key]: value } }));
+    const toggleFilters = () =>
+        setState((prevState) => ({ ...prevState, isFiltersHidden: !prevState.isFiltersHidden }));
+    const clearFilters = () => setState((prevState) => ({ ...prevState, filters: FILTERS_INIT }));
 
-    const getMovies = async page => {
+    const getMovies = async (page) => {
         try {
-            setState((prevState) => ({...prevState, isLoading: true }));
+            setState((prevState) => ({ ...prevState, isLoading: true }));
             const { data } = await axios.get(URL_MOVIE, {
                 params: {
                     ...normalizeFilters(state.filters),
@@ -34,9 +35,13 @@ const Movies = () => {
                     per_page: MOVIE_ON_PAGE,
                 },
             });
-            setState((prevState) => ({...prevState, movies: [...prevState.movies, ...data], currentPage: prevState.currentPage + 1 }));
+            setState((prevState) => ({
+                ...prevState,
+                movies: [...prevState.movies, ...data],
+                currentPage: prevState.currentPage + 1,
+            }));
         } finally {
-            setState((prevState) => ({...prevState, isLoading: false }));
+            setState((prevState) => ({ ...prevState, isLoading: false }));
             setTimeout(scrollToDownPage, 200);
         }
     };
@@ -44,47 +49,24 @@ const Movies = () => {
     const loadMore = (e, page) => getMovies(page);
 
     const submitResetFilters = (e) => {
-        setState((prevState) => ({...prevState, currentPage: 1, movies: [], isFiltersHidden: true }) );
-        loadMore(e,1);
+        setState((prevState) => ({ ...prevState, currentPage: 1, movies: [], isFiltersHidden: true }));
+        loadMore(e, 1);
     };
-
 
     return (
         <StMovieWrapper>
             <StPlaceRight>
-                <Button width="100px" onClick={toggleFilters} contentKey="Filters" />
+                <Button width="100px" onClick={toggleFilters} contentKey="Filters" data-testid="filters-toggler" />
             </StPlaceRight>
-            {(state.movies.length)
-                ? <>
-                    <StMovies>
-                        {state.movies.map((element) => (
-                            <MovieCard
-                                key={element.id}
-                                id={element.id}
-                                backdropPath={element.backdrop_path}
-                                title={element.title}
-                                runtime={element.runtime}
-                                voteAverage={element.vote_average}
-                            />
-                        ))}
-                    </StMovies>
-                    <StCenter>
-                        <Button
-                            className="button"
-                            isLoading={state.isLoading}
-                            contentKey="Load more"
-                            onClick={loadMore}
-                        />
-                    </StCenter>
-                </>
-                :state.isLoading ? false :<NoData/>}
-            <StFiltersModal hidden={state.isFiltersHidden}>
+            <MoviesMainWrapper movies={state.movies} isLoading={state.isLoading} loadMore={loadMore} />
+            <StFiltersModal hidden={state.isFiltersHidden} data-testid="filter-modal">
                 <Filters
                     closeModal={toggleFilters}
                     onSubmite={submitResetFilters}
                     filters={state.filters}
                     setFilter={setFilter}
-                    clearFilters={clearFilters} />
+                    clearFilters={clearFilters}
+                />
             </StFiltersModal>
         </StMovieWrapper>
     );
